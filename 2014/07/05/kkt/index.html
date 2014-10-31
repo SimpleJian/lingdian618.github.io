@@ -1,0 +1,422 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>对KKT条件的理解 | Just follow your heart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Lijian">
+    
+    <meta name="description" content="带约束的数值优化问题
+数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：
+$$min f(x)$$
+$$s.t. \quad g_i(x)\geq0, h_j(x)=0$$
+其中，f(x)是优化目标，x是变量，g(x)是">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/little.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Just follow your heart" title="Just follow your heart"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Just follow your heart">Just follow your heart</a></h1>
+				<h2 class="blog-motto">Everything is possible if you have the real passion to what you do</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/07/05/kkt/" title="对KKT条件的理解" itemprop="url">对KKT条件的理解</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://lingdian618.github.io" title="Lijian">Lijian</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-07-04T16:00:00.000Z" itemprop="datePublished">Jul 5 2014</time>
+    Updated:<time datetime="2014-10-30T00:40:54.000Z" itemprop="dateModified">Oct 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无约束优化问题的一阶必要性条件"><span class="toc-number">2.</span> <span class="toc-text">无约束优化问题的一阶必要性条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只含等式约束的一阶必要性条件—lagrangian_methond"><span class="toc-number">3.</span> <span class="toc-text">只含等式约束的一阶必要性条件—lagrangian methond</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般优化问题的一阶必要性条件—KKT_condition"><span class="toc-number">4.</span> <span class="toc-text">一般优化问题的一阶必要性条件—KKT condition</span></a></li></ol>
+		</div>
+		
+		<h2 id="带约束的数值优化问题">带约束的数值优化问题</h2>
+<p>数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：</p>
+<p>$$min f(x)$$</p>
+<p>$$s.t. \quad g_i(x)\geq0, h_j(x)=0$$</p>
+<p>其中，f(x)是优化目标，x是变量，g(x)是不等式约束，h(x)是等式约束，通常来说，所有的优化问题都可以转化为以上形式。</p>
+<h2 id="无约束优化问题的一阶必要性条件">无约束优化问题的一阶必要性条件</h2>
+<p>$$ \nabla f(x)=0 $$</p>
+<h2 id="只含等式约束的一阶必要性条件—lagrangian_methond">只含等式约束的一阶必要性条件—lagrangian methond</h2>
+<p>$$ \nabla f(x) = \sum\lambda_i\nabla h_i(x) $$</p>
+<h2 id="一般优化问题的一阶必要性条件—KKT_condition">一般优化问题的一阶必要性条件—KKT condition</h2>
+<span>$$\nabla f(x) = \sum\lambda_i\nabla h_i(x) + \sum_{\mu_j \geq 0}\mu_j\nabla g_j(x) \\
+\mu_j g_j(x) = 0，\quad \forall j$$</span>
+
+
+<p>无论优化问题是否有约束，一阶必要性条件在本质上是一样的，如果某点是极值点，那么在该点处一定不存在一个可行的下降（上升）方向使函数值减小（增大），这就是极值点的一阶必要性条件，以下2种情况可以满足该条件：</p>
+<ul>
+<li>函数在该点的梯度为0，典型的例子是无约束优化问题的一阶必要性条件；</li>
+<li>函数在该点的梯度不为0，但由于约束条件的存在，无法沿梯度方向移动来使函数值发生变化。</li>
+</ul>
+<p>先考虑只有一个等式约束的情况，此时自变量的可行域是一个约束面，假设$ x $最初位于$ x_0 $处，那么此时$ x $的移动方向肯定不能与约束面的法向量方向平行，也不能包含法向量方向的分量，否则沿该方向移动将使得$ x $跳出约束面。所以，当目标函数的梯度方向与约束面在该点的法向量方向平行时，就找不到一个可行的合法的下降方向了（沿梯度方向移动才能下降）。用数学公式表达出来就是$ \nabla f(x) = \lambda \nabla h(x) $，这正是只含一个等式约束条件的一阶必要性条件。</p>
+<p>再考虑有多个等式约束的情况，此时自变量可行域为多个约束面的交集，如果目标函数的梯度恰好可以分解为约束面的法向量线性组合，那么，沿目标函数梯度方向的移动将会违背约束条件，所以，含多个等式约束的优化问题的一阶必要性条件为：$ \nabla f(x) = \sum \lambda_i \nabla h_i(x) $</p>
+<p>最后考虑含不等式约束的情况，此时的可行域是由等式约束决定的约束面以及由不等式约束决定的区域的交集。要判定 $ x $是否是极值点，可分以下2种情况考虑：</p>
+<ol>
+<li>$ x $位于区域边界上，此时不等式约束的等号恰好成立，此时的情况可以与等式约束类比，只不过在分解梯度的时候，限定了法向量的方向；</li>
+<li>$ x $位于区域内部，此时的不等式约束对可行方向不具约束力，在分解梯度时无需考虑，因此对应的$ \mu_j=0 $，这也解释了为什么要满足互补条件。</li>
+</ol>
+<p>总结，优化问题的一阶必要性条件的实质是考察梯度条件，这也是为什么叫“一阶”必要性条件的原因。对于带约束的优化问题，只要将约束条件转化为对可行方向的约束，就能够比较直观地理解一阶必要性条件。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Numerical-Optimization/">Numerical Optimization</a><a href="/tags/Nonlinear-Optimization/">Nonlinear Optimization</a><a href="/tags/KKT/">KKT</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://lingdian618.github.io/2014/07/05/kkt/" data-title="对KKT条件的理解 | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/07/12/SVM-model/" title="最优间隔分类器建模">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  最优间隔分类器建模</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/06/18/cluster/"  title="聚类中的关键问题--于剑老师讲座总结">
+ <strong>NEXT:</strong><br/> 
+ <span>聚类中的关键问题--于剑老师讲座总结
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无约束优化问题的一阶必要性条件"><span class="toc-number">2.</span> <span class="toc-text">无约束优化问题的一阶必要性条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只含等式约束的一阶必要性条件—lagrangian_methond"><span class="toc-number">3.</span> <span class="toc-text">只含等式约束的一阶必要性条件—lagrangian methond</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般优化问题的一阶必要性条件—KKT_condition"><span class="toc-number">4.</span> <span class="toc-text">一般优化问题的一阶必要性条件—KKT condition</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/DCT/" title="DCT">DCT<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DFT/" title="DFT">DFT<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Digit-image-process/" title="Digit image process">Digit image process<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Introduction-to-algorithm/" title="Introduction to algorithm">Introduction to algorithm<sup>1</sup></a></li>
+		
+			<li><a href="/tags/KKT/" title="KKT">KKT<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Nonlinear-Optimization/" title="Nonlinear Optimization">Nonlinear Optimization<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Numerical-Optimization/" title="Numerical Optimization">Numerical Optimization<sup>1</sup></a></li>
+		
+			<li><a href="/tags/SVM/" title="SVM">SVM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/classification/" title="classification">classification<sup>1</sup></a></li>
+		
+			<li><a href="/tags/correlation/" title="correlation">correlation<sup>1</sup></a></li>
+		
+			<li><a href="/tags/lecture/" title="lecture">lecture<sup>1</sup></a></li>
+		
+			<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
+		
+			<li><a href="/tags/math/" title="math">math<sup>1</sup></a></li>
+		
+			<li><a href="/tags/model/" title="model">model<sup>1</sup></a></li>
+		
+			<li><a href="/tags/pattern/" title="pattern">pattern<sup>1</sup></a></li>
+		
+			<li><a href="/tags/probability/" title="probability">probability<sup>1</sup></a></li>
+		
+			<li><a href="/tags/recognition/" title="recognition">recognition<sup>1</sup></a></li>
+		
+			<li><a href="/tags/similarity/" title="similarity">similarity<sup>1</sup></a></li>
+		
+			<li><a href="/tags/summary/" title="summary">summary<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Lijian, a graduate student in Beijing. <br/>
+			Welcome to this blog, enjoy yourself!</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/1857370020" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/lingdian618" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://lingdian618.github.io" target="_blank" title="Lijian">Lijian</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lingdian618"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

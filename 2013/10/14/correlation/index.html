@@ -1,0 +1,387 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>对相关性的理解 | Just follow your heart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Lijian">
+    
+    <meta name="description" content="何为相关性，根据我的理解，相关性就是某种联系，举几个具体例子，比如说人的身高与体重之间的联系、体重与性别之间的联系、物价与房价之间的联系等等。说到相关性，就不得不提到因果关系，根据我的理解，因果关系应该算是一种比较特殊的相关性，而相关的事物之间不一定具备因果联系。相关性又可以分为线性相关和非线性相关">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/little.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Just follow your heart" title="Just follow your heart"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Just follow your heart">Just follow your heart</a></h1>
+				<h2 class="blog-motto">Everything is possible if you have the real passion to what you do</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/10/14/correlation/" title="对相关性的理解" itemprop="url">对相关性的理解</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://lingdian618.github.io" title="Lijian">Lijian</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-10-13T16:00:00.000Z" itemprop="datePublished">Oct 14 2013</time>
+    Updated:<time datetime="2014-10-30T00:42:16.000Z" itemprop="dateModified">Oct 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>何为相关性，根据我的理解，相关性就是某种联系，举几个具体例子，比如说人的身高与体重之间的联系、体重与性别之间的联系、物价与房价之间的联系等等。说到相关性，就不得不提到因果关系，根据我的理解，因果关系应该算是一种比较特殊的相关性，而相关的事物之间不一定具备因果联系。相关性又可以分为线性相关和非线性相关，在这里我要讨论的主要是线性相关。</p>
+<p>为何要进行相关性分析？根据马克思主义的观点，事物之间的联系是普遍的，科学研究的主要目的就是发现事物之间的联系，进而达到认识世界、改造世界的目的。这样说有点太大太空了，说点具体的，在数据挖掘等相关研究中，往往需要从海量数据中发现某种规律，从而提取有用信息。在这个过程中，由于数据太多、太杂、还可能有错误，所以在data mining之前必须要进行前期处理，否则就是”garbage in, garbage out”，而且数据量太大还会大大延长算法执行时间。在进行数据前期处理时，就可以对数据进行相关性分析，如果2组数据的相关性很高，就说明存在信息冗余，也许只要其中一组就行，按照这个思想，我们就能剔除很多重复的或者相似的数据。这个例子说明了相关性分析在处理海量数据中的一些应用。其他应用应该还有不少，只是我不知道，或者暂时没想到……</p>
+<p>如何进行相关性分析？比如说如何分析人的身高与体重之间的相关性，首先，我们需要数据，数据哪里来，抽样，然后测量样本的身高与体重，这样的话我们就得到了样本数据，用h表示身高数据，w表示体重数据。然后，我们要做的就是分析数组h和w的相关性，那么该如何衡量两个数组之间的相关性呢（线性相关）？一个比较直观的想法是，当一个数组是另一个的常数倍时，这两个数组的相关性应是最高的，那什么时候相关性最低呢？貌似不太直观。嗯，如果我们把这两组数据看成是两个向量呢？oh，yes，I get it！向量平行时，数据相关性最高；向量垂直时相关性最低！数据之间的相关性可以用对应向量之间的夹角来衡量。至于具体的公式，那就去看统计学教程吧！</p>
+<p>PS：之前对计算相关系数的那个公式一直不明白怎么来的，为什么要这样定义呢？直到最近我才发现那个公式在形式上很像计算向量之间夹角余弦值……，然后就有了这篇博文。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/similarity/">similarity</a><a href="/tags/pattern/">pattern</a><a href="/tags/recognition/">recognition</a><a href="/tags/correlation/">correlation</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://lingdian618.github.io/2013/10/14/correlation/" data-title="对相关性的理解 | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/10/21/polyDFT/" title="从多项式乘法看离散傅里叶变换（DFT）">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  从多项式乘法看离散傅里叶变换（DFT）</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/DCT/" title="DCT">DCT<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DFT/" title="DFT">DFT<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Digit-image-process/" title="Digit image process">Digit image process<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Introduction-to-algorithm/" title="Introduction to algorithm">Introduction to algorithm<sup>1</sup></a></li>
+		
+			<li><a href="/tags/KKT/" title="KKT">KKT<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Nonlinear-Optimization/" title="Nonlinear Optimization">Nonlinear Optimization<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Numerical-Optimization/" title="Numerical Optimization">Numerical Optimization<sup>1</sup></a></li>
+		
+			<li><a href="/tags/SVM/" title="SVM">SVM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/classification/" title="classification">classification<sup>1</sup></a></li>
+		
+			<li><a href="/tags/correlation/" title="correlation">correlation<sup>1</sup></a></li>
+		
+			<li><a href="/tags/lecture/" title="lecture">lecture<sup>1</sup></a></li>
+		
+			<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
+		
+			<li><a href="/tags/math/" title="math">math<sup>1</sup></a></li>
+		
+			<li><a href="/tags/model/" title="model">model<sup>1</sup></a></li>
+		
+			<li><a href="/tags/pattern/" title="pattern">pattern<sup>1</sup></a></li>
+		
+			<li><a href="/tags/probability/" title="probability">probability<sup>1</sup></a></li>
+		
+			<li><a href="/tags/recognition/" title="recognition">recognition<sup>1</sup></a></li>
+		
+			<li><a href="/tags/similarity/" title="similarity">similarity<sup>1</sup></a></li>
+		
+			<li><a href="/tags/summary/" title="summary">summary<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Lijian, a graduate student in Beijing. <br/>
+			Welcome to this blog, enjoy yourself!</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/1857370020" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/lingdian618" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://lingdian618.github.io" target="_blank" title="Lijian">Lijian</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lingdian618"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

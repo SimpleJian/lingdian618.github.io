@@ -1,0 +1,399 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>从多项式乘法看离散傅里叶变换（DFT） | Just follow your heart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Lijian">
+    
+    <meta name="description" content="离散傅里叶变换是数字信号处理中的重要内容，然而但从公式出发很难获得比较直观的理解。在工程上，我们一般将其理解为，一个长度有限的数字信号可以分解为有限个离散三角函数信号，这样一来DFT的物理意义和相关性质就比较清晰，对DFT的一些性质我们无需从公式出发进行数学推导，可以根据物理意义来理解。比如数字信号">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/little.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Just follow your heart" title="Just follow your heart"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Just follow your heart">Just follow your heart</a></h1>
+				<h2 class="blog-motto">Everything is possible if you have the real passion to what you do</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/10/21/polyDFT/" title="从多项式乘法看离散傅里叶变换（DFT）" itemprop="url">从多项式乘法看离散傅里叶变换（DFT）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://lingdian618.github.io" title="Lijian">Lijian</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-10-20T16:00:00.000Z" itemprop="datePublished">Oct 21 2013</time>
+    Updated:<time datetime="2014-10-30T00:42:29.000Z" itemprop="dateModified">Oct 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>离散傅里叶变换是数字信号处理中的重要内容，然而但从公式出发很难获得比较直观的理解。在工程上，我们一般将其理解为，一个长度有限的数字信号可以分解为有限个离散三角函数信号，这样一来DFT的物理意义和相关性质就比较清晰，对DFT的一些性质我们无需从公式出发进行数学推导，可以根据物理意义来理解。比如数字信号在时域的平移可以看成是有限个三角函数信号的平移，而三角函数信号的平移其时就是相位变化，对应的就是是频域的相移。其他一些时域的伸缩变换与频域的伸缩变换也可以这样来理解。但是对于卷积与乘积的关系，确实不好理解（可以看成是数字系统的响应，但还是有点抽象）。今天看完算法导论多项式相关内容，感觉对DFT有了更深的理解，特别是卷积与乘积的关系。</p>
+<p>大学期间学Z变换的时候，我就发现Z变换的结果其实就是(1/z)的多项式，多项式的系数就是时域的数字信号。我们考虑2个多项式的乘法，(1+x)*(1+2x)=1+3x+2x^2，通过计算不难发现2点，第一，结果仍是多项式(废话)；第二，结果系数(1, 3, 2)就是原多项式系数(1, 1)和(1, 2)的卷积，这样一来就轻易理解了Z域的乘积对应于时域的卷积。Z变换好理解，离散傅里叶变换呢？你可能想当然的认为差不多，其实差远了。Z变换的结果是多项式，而DFT的结果仍是一个数字序列(一般是复数)，这跟多项式貌似没啥关系呀！其实还是有关系的(没关系我还说个鸟)。对于多项式，我们有2种表示方法，一是系数表示法，二是点值表示法。系数表示法想必大家都清楚，至于点值表示法，具体来讲，就是2个不同点可以确定一条直线(一次多项式)，3点不同点可以确定一条抛物线(二次多项式)，以此类推，我们只需要n+1个不同的点就能唯一确定一个n次多项式(姑且叫多项式采样定理吧)。从信号的角度来理解的话，结论就是，只需n+1个不同采样点就能完全恢复n次多项式信号(是不是很神奇)。DFT的结果其实就能看成一个多项式的点值表示。只是采样点比较奇葩，全是复数，N点DFT的采样点正是方程 x^N = 1 的N个复数解(复平面中圆心位于原点的单位圆上均匀分布的N条半径)。</p>
+<p>如果知道了2个多项式A和B的点值表达，我们能不能求得多项式C=A<em>B的点值表达呢？首先，我们得保证A和B的点值表达是基于相同的采样点，这样 一来对应采样点处的值相乘就能得到C在该点处的值；其次，我们得保证采样点的数目足够多，设A为n次多项式，B为m次多项式，则C=A</em>B为n+m-1次多项式，根据“多项式采样定理”，我们至少需要n+m个采样点。综上所述，如果我们知道A和B在(n+m)个不同点处的值，那么就能得到C的点值表达。</p>
+<p>之前提到，对应一个长为N的离散数字信号，若视其为N-1次多项式的系数，则其DFT就是该多项式的N点表达。我们要是想得到该多项式的L(L &gt; N)点表达呢？不难想到把该信号用0补成长为L的信号，补长后的信号可以看成是L-1次多项式的系数，高次项为0而已。补长后再进行DFT就能得到多项式的L点表达。</p>
+<p>现在有2个长度分别为n和m的离散数字信号，该如何通过DFT来计算其卷积呢？首先，2个多项式的系数卷积=多项式乘积的系数；其次，多项式系数DFT=多项式点值表达；再次，只要知道2个多项式的(n+m-1)点表达，就能求得其乘积多项式的点值表达。综上所述，卷积计算方法如下：首先，将2个信号用0补成长度为n+m-1(Why?)；其次，分别计算DFT，得到多项式的点值表达；再次，计算DFT的乘积，得到乘积多项式的点值表达；最后，计算IDFT(逆变换)，得到乘积多项式的系数，也就是原多项式系数的卷积，也即原信号的线性卷积。</p>
+<p>注意到我们在利用DFT计算2个信号的卷积时要先把信号进行加0补长为2个信号长度之和，要是不加长或者补0后长度仍不够会出现什么情况？具体分析如下：设原信号长度分别为n和m，补0处理后的长度为N，max(n, m) &lt;= N &lt; n+m-1，此时进行DFT可得到多项式的N点表达，再做乘法可得乘积多项式的N个采样值，由于N&lt;n+m-1，根据“多项式采样定理”知无法恢复n+m-1次多项式，我们进行IDFT后得到的只是一个N-1次多项式的系数，并不是乘积多项式系数的卷积，但二者之间并非毫无关联。我们知道DFT是多项式的采样值，而且采样点是方程 x^N = 1 的解，这样一来就有，x^(N+k) = x^k，对于一个高于N-1次的多项式而言，就可以将其高于N-1次的项替换成低次项，并且保证替换后的多项式在采样点处的值不变。替换操作在系数上的变化表现为，高次项的系数被累加到低次项。举个例子，L次多项式系数为[1, 1, 1, 1, 1]，若N=3，则替换后的多项式系数为[2, 2, 1]。</p>
+<p>其实，N点DFT的乘积对应时域信号的N点循环卷积。2个长分别为n和m的信号做N点循环卷积，其结果的DFT等于原信号N点DFT的乘积，当且仅当N &gt;= n+m-1时，循环卷积与线性卷积(通常意义下2个离散信号的卷积)才相等。正因如此，我们才能利用DFT (存在快速算法FFT)来计算线性卷积。</p>
+<p>终于完了，写得有些混乱了……</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Digit-image-process/">Digit image process</a><a href="/tags/DFT/">DFT</a><a href="/tags/Introduction-to-algorithm/">Introduction to algorithm</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://lingdian618.github.io/2013/10/21/polyDFT/" data-title="从多项式乘法看离散傅里叶变换（DFT） | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/11/03/DCT/" title="离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/14/correlation/"  title="对相关性的理解">
+ <strong>NEXT:</strong><br/> 
+ <span>对相关性的理解
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/DCT/" title="DCT">DCT<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DFT/" title="DFT">DFT<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Digit-image-process/" title="Digit image process">Digit image process<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Introduction-to-algorithm/" title="Introduction to algorithm">Introduction to algorithm<sup>1</sup></a></li>
+		
+			<li><a href="/tags/KKT/" title="KKT">KKT<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Nonlinear-Optimization/" title="Nonlinear Optimization">Nonlinear Optimization<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Numerical-Optimization/" title="Numerical Optimization">Numerical Optimization<sup>1</sup></a></li>
+		
+			<li><a href="/tags/SVM/" title="SVM">SVM<sup>1</sup></a></li>
+		
+			<li><a href="/tags/classification/" title="classification">classification<sup>1</sup></a></li>
+		
+			<li><a href="/tags/correlation/" title="correlation">correlation<sup>1</sup></a></li>
+		
+			<li><a href="/tags/lecture/" title="lecture">lecture<sup>1</sup></a></li>
+		
+			<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
+		
+			<li><a href="/tags/math/" title="math">math<sup>1</sup></a></li>
+		
+			<li><a href="/tags/model/" title="model">model<sup>1</sup></a></li>
+		
+			<li><a href="/tags/pattern/" title="pattern">pattern<sup>1</sup></a></li>
+		
+			<li><a href="/tags/probability/" title="probability">probability<sup>1</sup></a></li>
+		
+			<li><a href="/tags/recognition/" title="recognition">recognition<sup>1</sup></a></li>
+		
+			<li><a href="/tags/similarity/" title="similarity">similarity<sup>1</sup></a></li>
+		
+			<li><a href="/tags/summary/" title="summary">summary<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Lijian, a graduate student in Beijing. <br/>
+			Welcome to this blog, enjoy yourself!</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/1857370020" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/lingdian618" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://lingdian618.github.io" target="_blank" title="Lijian">Lijian</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lingdian618"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
