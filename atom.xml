@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lingdian618.github.io/"/>
-  <updated>2014-11-03T09:05:15.781Z</updated>
+  <updated>2014-11-03T14:20:29.435Z</updated>
   <id>http://lingdian618.github.io/</id>
   
   <author>
@@ -13,6 +13,27 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[photo test]]></title>
+    <link href="http://lingdian618.github.io/2014/11/03/photo-test/"/>
+    <id>http://lingdian618.github.io/2014/11/03/photo-test/</id>
+    <published>2014-11-03T14:17:15.000Z</published>
+    <updated>2014-11-03T14:20:23.000Z</updated>
+    <content type="html"><![CDATA[<p>photos: </p>
+<ul>
+<li><a href="http://lingdian618.u.qiniudn.com/me.jpg" target="_blank" rel="external">http://lingdian618.u.qiniudn.com/me.jpg</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>photos: </p>
+<ul>
+<li><a href="http://lingdian618.u.qiniudn.com/me.jpg" target="_blank" rel="external">http://lingdian618.u.qiniudn.com/m]]>
+    </summary>
+    
+      <category term="photo" scheme="http://lingdian618.github.io/tags/photo/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[最优间隔分类器建模]]></title>
