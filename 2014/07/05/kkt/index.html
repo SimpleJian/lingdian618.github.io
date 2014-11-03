@@ -13,7 +13,8 @@
 数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：
 $$min f(x) \\
 s.t. \quad g_i(x)\geq0, h_j(x)=0$$
-其中，f(x)是优化目标，x是变量，g(x)是不">
+
+其中，f(x)是优化目标，x是变量，g(x)是">
     
     
     
@@ -109,7 +110,7 @@ s.t. \quad g_i(x)\geq0, h_j(x)=0$$
     </p>
   <p class="article-time">
     <time datetime="2014-07-04T16:00:00.000Z" itemprop="datePublished">Jul 5 2014</time>
-    Updated:<time datetime="2014-11-03T00:43:02.000Z" itemprop="dateModified">Nov 3 2014</time>
+    Updated:<time datetime="2014-11-03T09:01:25.000Z" itemprop="dateModified">Nov 3 2014</time>
     
   </p>
 </header>
@@ -118,23 +119,26 @@ s.t. \quad g_i(x)\geq0, h_j(x)=0$$
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无约束优化问题的一阶必要性条件"><span class="toc-number">2.</span> <span class="toc-text">无约束优化问题的一阶必要性条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只含等式约束的一阶必要性条件—lagrangian_methond"><span class="toc-number">3.</span> <span class="toc-text">只含等式约束的一阶必要性条件—lagrangian methond</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般优化问题的一阶必要性条件—KKT_condition"><span class="toc-number">4.</span> <span class="toc-text">一般优化问题的一阶必要性条件—KKT condition</span></a></li></ol>
 		</div>
 		
 		<h2 id="带约束的数值优化问题">带约束的数值优化问题</h2>
 <p>数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：</p>
 <span>$$min f(x) \\
-s.t. \quad g_i(x)\geq0, h_j(x)=0<escape><span>$$
-其中，f(x)是优化目标，x是变量，g(x)是不等式约束，h(x)是等式约束，通常来说，所有的优化问题都可以转化为以上形式。
+s.t. \quad g_i(x)\geq0, h_j(x)=0$$</span>
 
-## 无约束优化问题的一阶必要性条件
-<escape><span>$$\nabla f(x)=0<escape><span>$$
+<p>其中，f(x)是优化目标，x是变量，g(x)是不等式约束，h(x)是等式约束，通常来说，所有的优化问题都可以转化为以上形式。</p>
+<h2 id="无约束优化问题的一阶必要性条件">无约束优化问题的一阶必要性条件</h2>
+<span>$$\nabla f(x)=0$$</span>
 
-## 只含等式约束的一阶必要性条件--lagrangian methond
-<escape><span>$$\nabla f(x) = \sum\lambda_i\nabla h_i(x)<escape><span>$$
-## 一般优化问题的一阶必要性条件--KKT condition
-<escape><span>$$\nabla f(x) = \sum\lambda_i\nabla h_i(x) + \sum_{\mu_j \geq 0}\mu_j\nabla g_j(x) \\
+
+<h2 id="只含等式约束的一阶必要性条件—lagrangian_methond">只含等式约束的一阶必要性条件—lagrangian methond</h2>
+<span>$$\nabla f(x) = \sum\lambda_i\nabla h_i(x)$$</span>
+
+<h2 id="一般优化问题的一阶必要性条件—KKT_condition">一般优化问题的一阶必要性条件—KKT condition</h2>
+<span>$$\nabla f(x) = \sum\lambda_i\nabla h_i(x) + \sum_{\mu_j \geq 0}\mu_j\nabla g_j(x) \\
 \mu_j g_j(x) = 0，\quad \forall j$$</span>
+
 
 <p>无论优化问题是否有约束，一阶必要性条件在本质上是一样的，如果某点是极值点，那么在该点处一定不存在一个可行的下降（上升）方向使函数值减小（增大），这就是极值点的一阶必要性条件，以下2种情况可以满足该条件：</p>
 <ul>
@@ -148,7 +152,7 @@ s.t. \quad g_i(x)\geq0, h_j(x)=0<escape><span>$$
 <li>$ x $位于区域边界上，此时不等式约束的等号恰好成立，此时的情况可以与等式约束类比，只不过在分解梯度的时候，限定了法向量的方向；</li>
 <li>$ x $位于区域内部，此时的不等式约束对可行方向不具约束力，在分解梯度时无需考虑，因此对应的$ \mu_j=0 $，这也解释了为什么要满足互补条件。</li>
 </ol>
-<p>总结，优化问题的一阶必要性条件的实质是考察梯度条件，这也是为什么叫“一阶”必要性条件的原因。对于带约束的优化问题，只要将约束条件转化为对可行方向的约束，就能够比较直观地理解一阶必要性条件。<br>$$</p></escape></span></escape>$$</span></escape>$$</span></escape>$$</span></escape>$$</span></escape>$$</span><p></p>
+<p>总结，优化问题的一阶必要性条件的实质是考察梯度条件，这也是为什么叫“一阶”必要性条件的原因。对于带约束的优化问题，只要将约束条件转化为对可行方向的约束，就能够比较直观地理解一阶必要性条件。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -206,7 +210,7 @@ s.t. \quad g_i(x)\geq0, h_j(x)=0<escape><span>$$
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无约束优化问题的一阶必要性条件"><span class="toc-number">2.</span> <span class="toc-text">无约束优化问题的一阶必要性条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只含等式约束的一阶必要性条件—lagrangian_methond"><span class="toc-number">3.</span> <span class="toc-text">只含等式约束的一阶必要性条件—lagrangian methond</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般优化问题的一阶必要性条件—KKT_condition"><span class="toc-number">4.</span> <span class="toc-text">一般优化问题的一阶必要性条件—KKT condition</span></a></li></ol>
   </div>
 
 <div id="asidepart">
