@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lingdian618.github.io/"/>
-  <updated>2014-11-04T13:15:03.431Z</updated>
+  <updated>2014-11-04T13:34:44.515Z</updated>
   <id>http://lingdian618.github.io/</id>
   
   <author>
@@ -13,55 +13,6 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[photo test]]></title>
-    <link href="http://lingdian618.github.io/2014/11/03/photo-test/"/>
-    <id>http://lingdian618.github.io/2014/11/03/photo-test/</id>
-    <published>2014-11-03T14:17:15.000Z</published>
-    <updated>2014-11-04T10:31:34.000Z</updated>
-    <content type="html"><![CDATA[<img src="http://lingdian618.qiniudn.com/images/me.jpg-small" class=" qiniu nofancybox"><br><img src="http://lingdian618.qiniudn.com/images/me2.jpg-small" class=" qiniu nofancybox"><br><img src="http://lingdian618.qiniudn.com/images/next.jpg-big" class=" qiniu nofancybox">
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<img src="http://lingdian618.qiniudn.com/images/me.jpg-small" class=" qiniu nofancybox"><br><img src="http://lingdian618.qiniudn.com/images/]]>
-    </summary>
-    
-      <category term="photo" scheme="http://lingdian618.github.io/tags/photo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[最优间隔分类器建模]]></title>
-    <link href="http://lingdian618.github.io/2014/07/12/SVM-model/"/>
-    <id>http://lingdian618.github.io/2014/07/12/SVM-model/</id>
-    <published>2014-07-11T16:00:00.000Z</published>
-    <updated>2014-10-31T14:40:52.000Z</updated>
-    <content type="html"><![CDATA[<p>针对任何分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：</p>
-<p>$$<br>( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m<br>$$</p>
-<p>其中，$ {\vec x}_i $表示第i个样本的特征向量，$ y_i $表示第i个样本所属类别。</p>
-<p>对于二分类问题，设线性分类器的判别函数为 $ d({\vec x})={\vec w} \cdot {\vec x}+b $，对于一个待分类样本，通过特征提取得到其特征向量，将特征向量代入分类器判别函数，若输出为正，则将样本判定为+1类，否则为-1类。从几何的观点来看，特征提取是将样本抽象为欧氏空间中的一个点，而判别函数是该空间中的一个超平面，超平面不同侧的点对应不同类别的样本。因此，如果样本线性可分的话，那么就存在无穷多个超平面将其分开，也即存在无穷多个线性分类器能将样本分开，既然是这样，那么哪一个最好呢？直观上看，应该使分类超平面离样本点越远越好，这样可以减小把新样本分错的概率。当然，此处的“越远越好”的前提是要正确分类。分类器的间隔定义为所有样本点到分类超平面的距离中的最小值。最优间隔分类器就是间隔最大的分类器。</p>
-<p>样本点 $ {\vec x}_i $ 到超平面的距离为：</p>
-<p>$$<br>\frac{|\vec w \cdot {\vec x}_i + b|}{\Vert w \Vert}<br>$$</p>
-<p>最优间隔分类器的优化目标为：</p>
-<p>$$<br>\mathop{max}_{\vec w, b} { \mathop{min}_i { \frac{|\vec w \cdot {\vec x}_i + b|}{\Vert w \Vert} } }<br>$$</p>
-<p>要直接求解上述优化问题显然不易，然而，幸运的是可以将其转化为一个凸优化问题。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>针对任何分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：</p>
-<p>$$<br>( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m<br>$$</p>
-<p>其中，$ {\vec x}_i $表示第i个样本的特征向量，$ ]]>
-    </summary>
-    
-      <category term="SVM" scheme="http://lingdian618.github.io/tags/SVM/"/>
-    
-      <category term="classification" scheme="http://lingdian618.github.io/tags/classification/"/>
-    
-      <category term="model" scheme="http://lingdian618.github.io/tags/model/"/>
-    
-      <category term="学习笔记" scheme="http://lingdian618.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
   
   <entry>
     <title><![CDATA[对KKT条件的理解]]></title>
