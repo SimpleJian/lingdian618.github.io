@@ -105,7 +105,7 @@
     </p>
   <p class="article-time">
     <time datetime="2013-10-20T16:00:00.000Z" itemprop="datePublished">Oct 21 2013</time>
-    Updated:<time datetime="2014-11-04T14:40:36.000Z" itemprop="dateModified">Nov 4 2014</time>
+    Updated:<time datetime="2014-11-05T14:10:35.000Z" itemprop="dateModified">Nov 5 2014</time>
     
   </p>
 </header>
@@ -122,8 +122,8 @@
 <p>如果知道了2个多项式A和B的点值表达，我们能不能求得多项式C=A<em>B的点值表达呢？首先，我们得保证A和B的点值表达是基于相同的采样点，这样 一来对应采样点处的值相乘就能得到C在该点处的值；其次，我们得保证采样点的数目足够多，设A为n次多项式，B为m次多项式，则C=A</em>B为n+m-1次多项式，根据“多项式采样定理”，我们至少需要n+m个采样点。综上所述，如果我们知道A和B在(n+m)个不同时刻的采样值(A和B的采用时间要同步)，那么就能得到C的点值表达。</p>
 <p>之前提到，对应一个长为N的离散数字信号，若视其为N-1次多项式的系数，则其DFT就是该多项式的N点表达。我们要是想得到该多项式的L(L &gt; N)点表达呢？不难想到把该信号用0补成长为L的信号，补长后的信号可以看成是L-1次多项式的系数，高次项为0而已。补长后再进行DFT就能得到多项式的L点表达。</p>
 <p>现在有2个长度分别为n和m的离散数字信号，该如何通过DFT来计算其卷积呢？首先，2个多项式的系数卷积=多项式乘积的系数；其次，多项式系数DFT=多项式点值表达；再次，只要知道2个多项式的(n+m-1)点表达，就能求得其乘积多项式的点值表达。综上所述，卷积计算方法如下：首先，将2个信号用0补成长度为n+m-1(Why?)；其次，分别计算DFT，得到多项式的点值表达；再次，计算DFT的乘积，得到乘积多项式的点值表达；最后，计算IDFT(逆变换)，得到乘积多项式的系数，也就是原多项式系数的卷积，也即原信号的线性卷积。</p>
-<p>注意到我们在利用DFT计算2个信号的卷积时要先把信号进行加0补长为2个信号长度之和，要是不加长或者补0后长度仍不够会出现什么情况？具体分析如下：设原信号长度分别为n和m，补0处理后的长度为N，<span>$\max(n, m) <= n="" <="" n+m-1$<="" span="">，此时进行DFT可得到多项式的N点表达，再做乘法可得乘积多项式的N个采样值，由于<span>$N< n+m-1$</span>，根据“多项式采样定理”知无法恢复<span>$n+m-1$</span>次多项式，我们进行IDFT后得到的只是一个N-1次多项式的系数，并不是乘积多项式系数的卷积，但二者之间并非毫无关联。我们知道DFT是多项式的采样值，而且采样点是方程 x^N = 1 的解，这样一来就有，<span>$x^\left(N+k\right) = x^k$</span>，对于一个高于N-1次的多项式而言，就可以将其高于N-1次的项替换成低次项，并且保证替换后的多项式在采样点处的值不变。替换操作在系数上的变化表现为，高次项的系数被累加到低次项。举个例子，L次多项式系数为[1, 1, 1, 1, 1]，若N=3，则替换后的多项式系数为[2, 2, 1]。</=></span></p>
-<p>其实，N点DFT的乘积对应时域信号的N点循环卷积。2个长分别为n和m的信号做N点循环卷积，其结果的DFT等于原信号N点DFT的乘积，当且仅当N &gt;= n+m-1时，循环卷积与线性卷积(通常意义下2个离散信号的卷积)才相等。正因如此，我们可以利用DFT来计算线性卷积，而DFT存在快速算法（FFT），从而大大降低线性卷积的复杂度。</p>
+<p>注意到我们在利用DFT计算2个信号的卷积时要先把信号进行加0补长为2个信号长度之和，要是不加长或者补0后长度仍不够会出现什么情况？具体分析如下：设原信号长度分别为n和m，补0处理后的长度为N，<span>$max(n, m) \leq N < n+m-1$</span>，此时进行DFT可得到多项式的N点表达，再做乘法可得乘积多项式的N个采样值，由于<span>$N< n+m-1$</span>，根据“多项式采样定理”知无法恢复<span>$n+m-1$</span>次多项式，我们进行IDFT后得到的只是一个N-1次多项式的系数，并不是乘积多项式系数的卷积，但二者之间并非毫无关联。我们知道DFT是多项式的采样值，而且采样点是方程 x^N = 1 的解，这样一来就有，<span>$x^\left(N+k\right) = x^k$</span>，对于一个高于N-1次的多项式而言，就可以将其高于N-1次的项替换成低次项，并且保证替换后的多项式在采样点处的值不变。替换操作在系数上的变化表现为，高次项的系数被累加到低次项。举个例子，L次多项式系数为[1, 1, 1, 1, 1]，若N=3，则替换后的多项式系数为[2, 2, 1]。</p>
+<p>其实，N点DFT的乘积对应时域信号的N点循环卷积。2个长分别为n和m的信号做N点循环卷积，其结果的DFT等于原信号N点DFT的乘积，当且仅当<span>$N >= n+m-1$</span>时，循环卷积与线性卷积(通常意义下2个离散信号的卷积)才相等。正因如此，我们可以利用DFT来计算线性卷积，而DFT存在快速算法（FFT），从而大大降低线性卷积的复杂度。</p>
 <p>终于完了，写得有些混乱了，也不知道讲清楚没。</p>
   
 	</div>
@@ -240,7 +240,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">Archives</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">2</span></li></ul>
   </div>
 
 
