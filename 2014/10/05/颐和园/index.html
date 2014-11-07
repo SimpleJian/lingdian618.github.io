@@ -4,17 +4,10 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>对KKT条件的理解 | Just follow your heart</title>
+    <title>颐和园 | Just follow your heart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Lijian">
-    
-    <meta name="description" content="带约束的数值优化问题
-数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：
-$$min f(\vec{x}) \\
-s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
-
-其中，$f">
     
     
     
@@ -102,77 +95,108 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/07/05/kkt/" title="对KKT条件的理解" itemprop="url">对KKT条件的理解</a>
+      <a href="/2014/10/05/颐和园/" title="颐和园" itemprop="url">颐和园</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://lingdian618.github.io" title="Lijian">Lijian</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-07-04T16:00:00.000Z" itemprop="datePublished">Jul 5 2014</time>
-    Updated:<time datetime="2014-11-05T14:19:20.000Z" itemprop="dateModified">Nov 5 2014</time>
+    <time datetime="2014-10-04T16:00:00.000Z" itemprop="datePublished">Oct 5 2014</time>
+    Updated:<time datetime="2014-11-07T14:04:52.000Z" itemprop="dateModified">Nov 7 2014</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1462.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1462.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1465.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1465.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1466.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1466.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1467.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1467.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1476.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1476.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1477.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1477.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1478.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1478.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1481.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1481.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1482.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1482.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1483.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1483.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1484.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1484.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1485.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1485.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1486.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1486.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1501.JPG?imageView2/2/w/512/q/85" rel="gallery_kcufv6s248t90sam">
+        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1501.JPG?imageView2/2/w/512/q/85" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无约束优化问题的一阶必要性条件"><span class="toc-number">2.</span> <span class="toc-text">无约束优化问题的一阶必要性条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只含等式约束的一阶必要性条件—lagrangian_methond"><span class="toc-number">3.</span> <span class="toc-text">只含等式约束的一阶必要性条件—lagrangian methond</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般优化问题的一阶必要性条件—KKT_condition"><span class="toc-number">4.</span> <span class="toc-text">一般优化问题的一阶必要性条件—KKT condition</span></a></li></ol>
+		
 		</div>
 		
-		<h2 id="带约束的数值优化问题">带约束的数值优化问题</h2>
-<p>数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：</p>
-<span>$$min f(\vec{x}) \\
-s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
-
-<p>其中，<span>$f(\vec{x})$</span>是优化目标，<span>$\vec{x}$</span>是变量，<span>$g(\vec{x})$</span>是不等式约束，<span>$h(\vec{x})$</span>是等式约束，通常来说，所有的优化问题都可以转化为以上形式。</p>
-<h2 id="无约束优化问题的一阶必要性条件">无约束优化问题的一阶必要性条件</h2>
-<span>$$\nabla f(\vec{x})=0$$</span>
-
-
-<h2 id="只含等式约束的一阶必要性条件—lagrangian_methond">只含等式约束的一阶必要性条件—lagrangian methond</h2>
-<span>$$\nabla f(\vec{x}) = \sum\lambda_i\nabla h_i(\vec{x})$$</span>
-
-<h2 id="一般优化问题的一阶必要性条件—KKT_condition">一般优化问题的一阶必要性条件—KKT condition</h2>
-<span>$$\nabla f(\vec{x}) = \sum\lambda_i\nabla h_i(\vec{x}) + \sum_{\mu_j \geq 0}\mu_j\nabla g_j(\vec{x}) \\
-\mu_j g_j(\vec{x}) = 0，\quad \forall j$$</span>
-
-
-<p>无论优化问题是否有约束，一阶必要性条件在本质上是一样的，如果某点是极值点，那么在该点处一定不存在一个可行的下降（上升）方向使函数值减小（增大），这就是极值点的一阶必要性条件，以下2种情况可以满足该条件：</p>
-<ul>
-<li>函数在该点的梯度为0，典型的例子是无约束优化问题的一阶必要性条件；</li>
-<li>函数在该点的梯度不为0，但由于约束条件的存在，无法沿梯度方向移动来使函数值发生变化。</li>
-</ul>
-<p>先考虑只有一个等式约束的情况，此时自变量的可行域是一个约束面，假设<span>$\vec{x}$</span>最初位于<span>$\vec{x_0}$</span>处，那么此时<span>$\vec{x}$</span>的移动方向肯定不能与约束面的法向量方向平行，也不能包含法向量方向的分量，否则沿该方向移动将使得<span>$\vec{x}$</span>跳出约束面。所以，当目标函数的梯度方向与约束面在该点的法向量方向平行时，就找不到一个可行的合法的下降方向了（沿梯度方向移动才能下降）。用数学公式表达出来就是<span>$\nabla f(\vec{x}) = \lambda \nabla h(\vec{x})$</span>，这正是只含一个等式约束条件的一阶必要性条件。</p>
-<p>再考虑有多个等式约束的情况，此时自变量可行域为多个约束面的交集，如果目标函数的梯度恰好可以分解为约束面的法向量线性组合，那么，沿目标函数梯度方向的移动将会违背约束条件，所以，含多个等式约束的优化问题的一阶必要性条件为：<span>$\nabla f(\vec{x}) = \sum \lambda_i \nabla h_i(\vec{x})$</span></p>
-<p>最后考虑含不等式约束的情况，此时的可行域是由等式约束决定的约束面以及由不等式约束决定的区域的交集。要判定 <span>$\vec{x}$</span>是否是极值点，可分以下2种情况考虑：</p>
-<ol>
-<li><span>$\vec{x}$</span>位于区域边界上，此时不等式约束的等号恰好成立，此时的情况可以与等式约束类比，只不过在分解梯度的时候，限定了法向量的方向；</li>
-<li><span>$\vec{x}$</span>位于区域内部，此时的不等式约束对可行方向不具约束力，在分解梯度时无需考虑，因此对应的<span>$\mu_j=0$</span>，这也解释了为什么要满足互补条件。</li>
-</ol>
-<p>总结，优化问题的一阶必要性条件的实质是考察梯度条件，这也是为什么叫“一阶”必要性条件的原因。对于带约束的优化问题，只要将约束条件转化为对可行方向的约束，就能够比较直观地理解一阶必要性条件。</p>
-  
+		  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Numerical-Optimization/">Numerical Optimization</a><a href="/tags/Nonlinear-Optimization/">Nonlinear Optimization</a><a href="/tags/KKT/">KKT</a>
+  <span></span> <a href="/tags/photo/">photo</a><a href="/tags/travel/">travel</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  <a class="article-category-link" href="/categories/相册/">相册</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://lingdian618.github.io/2014/07/05/kkt/" data-title="对KKT条件的理解 | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
+  <div data-url="http://lingdian618.github.io/2014/10/05/颐和园/" data-title="颐和园 | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
   </div>
 
 </div>
@@ -181,19 +205,11 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/09/07/奥林匹克公园/" title="奥林匹克公园">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  奥林匹克公园</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/06/18/cluster/"  title="聚类中的关键问题--于剑老师讲座总结">
+<a href="/2014/10/01/圆明园/"  title="圆明园">
  <strong>NEXT:</strong><br/> 
- <span>聚类中的关键问题--于剑老师讲座总结
+ <span>圆明园
 </span>
 </a>
 </div>
@@ -210,7 +226,7 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#带约束的数值优化问题"><span class="toc-number">1.</span> <span class="toc-text">带约束的数值优化问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无约束优化问题的一阶必要性条件"><span class="toc-number">2.</span> <span class="toc-text">无约束优化问题的一阶必要性条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只含等式约束的一阶必要性条件—lagrangian_methond"><span class="toc-number">3.</span> <span class="toc-text">只含等式约束的一阶必要性条件—lagrangian methond</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般优化问题的一阶必要性条件—KKT_condition"><span class="toc-number">4.</span> <span class="toc-text">一般优化问题的一阶必要性条件—KKT condition</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
