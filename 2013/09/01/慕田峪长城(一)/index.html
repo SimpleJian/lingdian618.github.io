@@ -4,16 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系 | Just follow your heart</title>
+    <title>[object Object] | Just follow your heart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Lijian">
     
-    <meta name="description" content="理解DCT与DFT之间关系的关键几点
-
-偶函数的DFT结果只包含余弦项；
-对长度有限的数字信号，可以通过偶延拓和周期延拓，然后进行适当平移得到偶函数信号；
-偶延拓时使用不同的边界处理方法将得到不同的离散余弦变换；通常按以下方法处理边界：设原信号为{1 2 3 4}，通过偶延拓处理得到{1 2 3 4">
+    <meta name="description" content="">
     
     
     
@@ -101,15 +97,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/11/03/DCT/" title="离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系" itemprop="url">离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系</a>
+      <a href="/2013/09/01/慕田峪长城(一)/" title="[object Object]" itemprop="url">[object Object]</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://lingdian618.github.io" title="Lijian">Lijian</a>
     </p>
   <p class="article-time">
-    <time datetime="2013-11-02T16:00:00.000Z" itemprop="datePublished">Nov 3 2013</time>
-    Updated:<time datetime="2014-10-31T14:37:50.000Z" itemprop="dateModified">Oct 31 2014</time>
+    <time datetime="2013-08-31T16:00:00.000Z" itemprop="datePublished">Sep 1 2013</time>
+    Updated:<time datetime="2014-11-07T03:43:52.000Z" itemprop="dateModified">Nov 7 2014</time>
     
   </p>
 </header>
@@ -118,41 +114,31 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解DCT与DFT之间关系的关键几点"><span class="toc-number">1.</span> <span class="toc-text">理解DCT与DFT之间关系的关键几点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验结果："><span class="toc-number">2.</span> <span class="toc-text">实验结果：</span></a></li></ol>
+		
 		</div>
 		
-		<h2 id="理解DCT与DFT之间关系的关键几点">理解DCT与DFT之间关系的关键几点</h2>
-<ul>
-<li>偶函数的DFT结果只包含余弦项；</li>
-<li>对长度有限的数字信号，可以通过偶延拓和周期延拓，然后进行适当平移得到偶函数信号；</li>
-<li>偶延拓时使用不同的边界处理方法将得到不同的离散余弦变换；通常按以下方法处理边界：设原信号为{1 2 3 4}，通过偶延拓处理得到{1 2 3 4 4 3 2 1}，然后再进行周期延拓，x(n)=x(n-8)，此时我们发现x(-1)=x(7)=1，将信号右移0.5个单位就得到了偶函数信号。</li>
-<li>偶函数的DFT是奇函数，F(n)=0，F(k)=F(2n-k)，因此，虽然DFT结果长度为2n，然而仅需保存前n个即可，这n个数也即DCT变换结果(相差一个常量因子)。</li>
-</ul>
-<h2 id="实验结果：">实验结果：</h2>
-<p>{1 2 3 4}DCT结果为：</p>
-<p>{10.000    -3.154    0.000    -0.224}</p>
-<p>{1 2 3 4 4 3 2 1}先DFT再进行相位调整(时移0.5)的结果为：</p>
-<p>{10.000    -6.309    0.000    -0.448    0.000    0.448    0.000    6.309}</p>
+		<img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0642.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0643.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0644.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0645.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0646.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0647.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0648.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0649.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0650.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0652.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0654.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0656.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0657.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0658.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0659.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0660.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0661.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0662.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0663.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0664.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0665.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0666.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0667.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0668.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0669.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0671.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0672.JPG" class=" qiniu nofancybox"><br><img src="http://lingdian618subset.qiniudn.com/images/2014-09-01/IMG_0673.JPG" class=" qiniu nofancybox">
+
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/DCT/">DCT</a><a href="/tags/DFT/">DFT</a>
+  <span></span> <a href="/tags/photo/">photo</a><a href="/tags/travel/">travel</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  <a class="article-category-link" href="/categories/相册/">相册</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://lingdian618.github.io/2013/11/03/DCT/" data-title="离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系 | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
+  <div data-url="http://lingdian618.github.io/2013/09/01/慕田峪长城(一)/" data-title="[object Object] | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
   </div>
 
 </div>
@@ -162,21 +148,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/01/01/summary2013/" title="往者不可谏，来者犹可追">
+ <a href="/2013/10/14/correlation/" title="对相关性的理解">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  往者不可谏，来者犹可追</span>
+  对相关性的理解</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2013/10/21/polyDFT/"  title="多项式乘法与离散傅里叶变换（DFT）的关系">
- <strong>NEXT:</strong><br/> 
- <span>多项式乘法与离散傅里叶变换（DFT）的关系
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -190,7 +168,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解DCT与DFT之间关系的关键几点"><span class="toc-number">1.</span> <span class="toc-text">理解DCT与DFT之间关系的关键几点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验结果："><span class="toc-number">2.</span> <span class="toc-text">实验结果：</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
