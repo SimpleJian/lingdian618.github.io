@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lingdian618.github.io/"/>
-  <updated>2014-11-07T14:19:59.702Z</updated>
+  <updated>2014-11-07T14:45:09.420Z</updated>
   <id>http://lingdian618.github.io/</id>
   
   <author>
@@ -448,6 +448,23 @@ s.t. ]]>
       <category term="photo" scheme="http://lingdian618.github.io/tags/photo/"/>
     
       <category term="travel" scheme="http://lingdian618.github.io/tags/travel/"/>
+    
+      <category term="相册" scheme="http://lingdian618.github.io/categories/%E7%9B%B8%E5%86%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CSU随拍]]></title>
+    <link href="http://lingdian618.github.io/2013/06/22/CSU%E9%9A%8F%E6%8B%8D/"/>
+    <id>http://lingdian618.github.io/2013/06/22/CSU随拍/</id>
+    <published>2013-06-21T16:00:00.000Z</published>
+    <updated>2014-11-07T14:34:41.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    <summary type="html">
+    <![CDATA[]]>
+    </summary>
+    
+      <category term="photo" scheme="http://lingdian618.github.io/tags/photo/"/>
     
       <category term="相册" scheme="http://lingdian618.github.io/categories/%E7%9B%B8%E5%86%8C/"/>
     
