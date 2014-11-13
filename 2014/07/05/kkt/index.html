@@ -83,6 +83,12 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
 					
 						<li><a href="/archives">Archives</a></li>
 					
+						<li><a href="/gallery">Gallery</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
 					<li>
 					
 					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
@@ -115,7 +121,18 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
   </p>
 </header>
 	<div class="article-content">
-		
+		<% if (item.photos && item.photos.length){ %>
+<div class="article-gallery">
+<div class="article-gallery-photos">
+<% item.photos.forEach(function(photo, i){ %>
+<a class="article-gallery-img fancybox" href="<%- photo %>" rel="gallery_<%= item._id %>">
+<img src="<%- photo %>" itemprop="image">
+</a>
+<% }) %>
+</div>
+</div>
+<% } %>
+
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>

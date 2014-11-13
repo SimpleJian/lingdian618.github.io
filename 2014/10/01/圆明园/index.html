@@ -76,6 +76,12 @@
 					
 						<li><a href="/archives">Archives</a></li>
 					
+						<li><a href="/gallery">Gallery</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
 					<li>
 					
 					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
@@ -90,7 +96,7 @@
 
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="photo" itemscope itemprop="blogPost">
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
@@ -103,53 +109,22 @@
     </p>
   <p class="article-time">
     <time datetime="2014-09-30T16:00:00.000Z" itemprop="datePublished">Oct 1 2014</time>
-    Updated:<time datetime="2014-11-07T14:07:03.000Z" itemprop="dateModified">Nov 7 2014</time>
+    Updated:<time datetime="2014-11-12T13:41:47.000Z" itemprop="dateModified">Nov 12 2014</time>
     
   </p>
 </header>
 	<div class="article-content">
-		
+		<% if (item.photos && item.photos.length){ %>
 <div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1386.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1386.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1388.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1388.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1392.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1392.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1400.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1400.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1401.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1401.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1402.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1402.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1404.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1404.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1420.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1420.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1422.JPG?imageView2/2/w/512/q/85" rel="gallery_9t18v2d3o7eg2kn7">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1422.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-  </div>
+<div class="article-gallery-photos">
+<% item.photos.forEach(function(photo, i){ %>
+<a class="article-gallery-img fancybox" href="<%- photo %>" rel="gallery_<%= item._id %>">
+<img src="<%- photo %>" itemprop="image">
+</a>
+<% }) %>
 </div>
+</div>
+<% } %>
 
 		
 		<div id="toc" class="toc-article">
@@ -212,11 +187,6 @@
 </div>  
 
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -411,69 +381,8 @@ $(document).ready(function(){
 </script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
 
 
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"lingdian618"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
 
 
 <script type="text/javascript">
@@ -487,4 +396,4 @@ ga('send', 'pageview');
 
 
   </body>
-</html>
+ </html>
