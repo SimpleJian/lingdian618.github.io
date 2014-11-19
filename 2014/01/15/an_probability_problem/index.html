@@ -79,11 +79,7 @@
 					
 						<li><a href="/archives">Archives</a></li>
 					
-						<li><a href="/gallery">Gallery</a></li>
-					
-						<li><a href="/tags">Tags</a></li>
-					
-						<li><a href="/categories">Categories</a></li>
+						<li><a href="/categories/相册">Gallery</a></li>
 					
 					<li>
 					
@@ -117,18 +113,7 @@
   </p>
 </header>
 	<div class="article-content">
-		<% if (item.photos && item.photos.length){ %>
-<div class="article-gallery">
-<div class="article-gallery-photos">
-<% item.photos.forEach(function(photo, i){ %>
-<a class="article-gallery-img fancybox" href="<%- photo %>" rel="gallery_<%= item._id %>">
-<img src="<%- photo %>" itemprop="image">
-</a>
-<% }) %>
-</div>
-</div>
-<% } %>
-
+		
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
@@ -442,40 +427,15 @@ $(document).ready(function(){
 </script>
 
 
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"lingdian618"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 
 
+<script src="/js/script.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
+
 
 
 <script type="text/javascript">
@@ -490,3 +450,4 @@ ga('send', 'pageview');
 
   </body>
 </html>
+
