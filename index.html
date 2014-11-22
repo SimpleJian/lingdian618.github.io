@@ -97,356 +97,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-手机照片整理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <!-- 文章日期 -->
-    <a href="/2014/11/21/手机照片整理/" class="article-date">
-  <time datetime="2014-11-21T14:11:13.000Z" itemprop="datePublished">Nov 21 2014</time>
-</a>
-    <!-- 文章类别 -->
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    <!-- 文章开头的fancybox照片 -->
-    
-    
-      <header class="article-header">
-        <!-- 文章标题 -->
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/21/手机照片整理/">手机照片整理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
-      
-        <h2 id="问题由来">问题由来</h2>
-<p>手机里的照片从没好好整理过，每次拍完照之后都很少再看，这样日积月累，手机空间都快不够了。正好最近在折腾hexo博客，于是有了把一些照片发布到博客的想法。要把照片发布到博客，就得考虑以下一些问题：</p>
-<ul>
-<li>分类问题，由于照片太多了，一张张去找要发布照片就太麻烦了。而且有些照片都忘了啥时候拍的，如果能对其进行分类，同时贴上时间标签，那就方便多了；</li>
-<li>空间问题，照片总共好几个G，如何存储就是个问题，云存储是个不错选择。</li>
-</ul>
-<h2 id="方案及实现">方案及实现</h2>
-<p>基本想法是这样的，首先把照片从手机中copy到电脑上，然后用脚本对照片按时间进行初步分类，将同一天拍摄的照片放到同一个文件夹中，一般来说，照片都是放假出去玩的时候拍的，同一主题的照片在时间上相对集中，按时间分类后找起来方便点。在发布照片到博客时，把要发布的照片上传到云存储空间，然后在博客中引用外链即可。</p>
-<h3 id="照片分类">照片分类</h3>
-<p>分类的标准有多个，按时间分类是最容易用脚本实现的，但最适合发布博客的应该是按主题分类，而按主题分类实在太麻烦（涉及图片高层语义），考虑到同一主题的照片在拍摄时间上一般是连续的，所以最终决定初步按时间分类，在发布时根据需要按时间查找相应照片。下面是按时间分类的脚本实现：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="shebang">#! /bin/bash</span></div><div class="line"><span class="comment"># 尚未分类的照片目录</span></div><div class="line">src_dir=<span class="variable">$1</span></div><div class="line"><span class="comment"># 分类照片存储目录</span></div><div class="line">dst_dir=<span class="variable">$2</span></div><div class="line"><span class="comment"># 遍历src_dir中的所有照片</span></div><div class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> ` ls <span class="operator">-l</span> <span class="variable">$src_dir</span> | grep <span class="string">'^-'</span> | egrep -io <span class="string">'\w+\.(bmp|jpg|png|gif)$'</span> `</div><div class="line"><span class="keyword">do</span></div><div class="line">  <span class="comment"># 获取照片拍摄日期，根据日期在dst_dir中创建子目录，并将照片复制到相应目录</span></div><div class="line">  new_dir=` exiv2 <span class="variable">$src_dir</span>/<span class="variable">$filename</span> | egrep -o <span class="string">'[0-9]{4}:[0-9]{2}:[0-9]{2}'</span> | sed <span class="string">'s/:/-/g'</span> `</div><div class="line">  mkdir -p <span class="variable">$dst_dir</span>/<span class="variable">$new_dir</span></div><div class="line">  cp <span class="variable">$src_dir</span>/<span class="variable">$filename</span> <span class="variable">$dst_dir</span>/<span class="variable">$new_dir</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
-
-<h3 id="云存储空间">云存储空间</h3>
-<p>存储空间我选择了七牛云存储，原因很简单：免费，简单易用。实名注册成为标准用户后就能免费获得10G的空间和10G/月的下载流量，这对一般用户来说完全够用了。注册成功后就可以新建空间，上传文件了，具体操作可以参考<a href="https://portal.qiniu.com/tutorial/index" target="_blank" rel="external">=&gt;这里&lt;=</a>。若需要上传的文件太多或者太大，可以考虑使用七牛提供的同步工具<a href="http://developer.qiniu.com/docs/v6/tools/qrsync.html" target="_blank" rel="external">qrsync</a>。在博客中要使用照片时，直接引用公开空间中文件的外链地址即可。如果说原图太大，七牛提供了一些数据处理的功能，通过新建图片样式就能获得原图的缩略图。最后贴一下我的<a href="https://portal.qiniu.com/signup?code=3lffq2l27ktoy" target="_blank" rel="external">邀请链接</a>。</p>
-<h2 id="其他">其他</h2>
-<p>在上传照片到云空间，以及发布照片到博客的过程中，要时刻有保护个人隐私的意识（特别是批量上传时），要是一不小心把一些不该上传的东西上传到了公开空间甚至发布到博客，那就一世清名毁于一旦了……</p>
-
-      
-    </div>
-    <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/11/21/手机照片整理/" data-id="rhyly91imsguwnu6" class="article-share-link">Share</a>  -->
-      <!-- 文章的评论功能打开并且配置了disqus-->
-      
-      <!-- 显示文章标签 -->
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qiniu/">qiniu</a></li></ul>
-
-    </footer>
-  </div>
-  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
-  
-</article>
-
-
-  
-    <article id="post-颐和园" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <!-- 文章日期 -->
-    <a href="/2014/10/05/颐和园/" class="article-date">
-  <time datetime="2014-10-04T16:00:00.000Z" itemprop="datePublished">Oct 5 2014</time>
-</a>
-    <!-- 文章类别 -->
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/相册/">相册</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    <!-- 文章开头的fancybox照片 -->
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1462.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1462.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1465.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1465.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1466.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1466.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1467.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1467.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1476.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1476.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1477.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1477.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1478.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1478.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1481.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1481.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1482.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1482.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1483.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1483.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1484.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1484.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1485.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1485.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1486.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1486.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1501.JPG?imageView2/2/w/512/q/85" rel="gallery_fp30biko101js6g1">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-05/IMG_1501.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        <!-- 文章标题 -->
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/05/颐和园/">颐和园</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/10/05/颐和园/" data-id="fp30biko101js6g1" class="article-share-link">Share</a>  -->
-      <!-- 文章的评论功能打开并且配置了disqus-->
-      
-      <!-- 显示文章标签 -->
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/photo/">photo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travel/">travel</a></li></ul>
-
-    </footer>
-  </div>
-  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
-  
-</article>
-
-
-  
-    <article id="post-圆明园" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <!-- 文章日期 -->
-    <a href="/2014/10/01/圆明园/" class="article-date">
-  <time datetime="2014-09-30T16:00:00.000Z" itemprop="datePublished">Oct 1 2014</time>
-</a>
-    <!-- 文章类别 -->
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/相册/">相册</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    <!-- 文章开头的fancybox照片 -->
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1386.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1386.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1388.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1388.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1392.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1392.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1400.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1400.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1401.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1401.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1402.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1402.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1404.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1404.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1420.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1420.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1422.JPG?imageView2/2/w/512/q/85" rel="gallery_i3nr8a4xfnvclt2l">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-10-01/IMG_1422.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        <!-- 文章标题 -->
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/01/圆明园/">圆明园</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/10/01/圆明园/" data-id="i3nr8a4xfnvclt2l" class="article-share-link">Share</a>  -->
-      <!-- 文章的评论功能打开并且配置了disqus-->
-      
-      <!-- 显示文章标签 -->
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/photo/">photo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travel/">travel</a></li></ul>
-
-    </footer>
-  </div>
-  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
-  
-</article>
-
-
-  
-    <article id="post-奥林匹克公园" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <!-- 文章日期 -->
-    <a href="/2014/09/07/奥林匹克公园/" class="article-date">
-  <time datetime="2014-09-06T16:00:00.000Z" itemprop="datePublished">Sep 7 2014</time>
-</a>
-    <!-- 文章类别 -->
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/相册/">相册</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    <!-- 文章开头的fancybox照片 -->
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1365.JPG?imageView2/2/w/512/q/85" rel="gallery_n89x2g9noxdyf2db">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1365.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1361.JPG?imageView2/2/w/512/q/85" rel="gallery_n89x2g9noxdyf2db">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1361.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1362.JPG?imageView2/2/w/512/q/85" rel="gallery_n89x2g9noxdyf2db">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1362.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1366.JPG?imageView2/2/w/512/q/85" rel="gallery_n89x2g9noxdyf2db">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1366.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1367.JPG?imageView2/2/w/512/q/85" rel="gallery_n89x2g9noxdyf2db">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1367.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1368.JPG?imageView2/2/w/512/q/85" rel="gallery_n89x2g9noxdyf2db">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-09-07/IMG_1368.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        <!-- 文章标题 -->
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/07/奥林匹克公园/">奥林匹克公园</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/09/07/奥林匹克公园/" data-id="n89x2g9noxdyf2db" class="article-share-link">Share</a>  -->
-      <!-- 文章的评论功能打开并且配置了disqus-->
-      
-      <!-- 显示文章标签 -->
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/photo/">photo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travel/">travel</a></li></ul>
-
-    </footer>
-  </div>
-  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
-  
-</article>
-
-
-  
     <article id="post-kkt" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <!-- 文章日期 -->
@@ -478,47 +128,30 @@
     <div class="article-entry" itemprop="articleBody">
       <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
-        <h2 id="带约束的数值优化问题">带约束的数值优化问题</h2>
-<p>数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：</p>
-<span>$$min f(\vec{x}) \\
-s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
+        
+          <p itemprop="description" >带约束的数值优化问题
+数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：
+$$min f(\vec{x}) \\
+s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
 
-<p>其中，<span>$f(\vec{x})$</span>是优化目标，<span>$\vec{x}$</span>是变量，<span>$g(\vec{x})$</span>是不等式约束，<span>$h(\vec{x})$</span>是等式约束，通常来说，所有的优化问题都可以转化为以上形式。</p>
-<h2 id="无约束优化问题的一阶必要性条件">无约束优化问题的一阶必要性条件</h2>
-<span>$$\nabla f(\vec{x})=0$$</span>
-
-
-<h2 id="只含等式约束的一阶必要性条件—lagrangian_methond">只含等式约束的一阶必要性条件—lagrangian methond</h2>
-<span>$$\nabla f(\vec{x}) = \sum\lambda_i\nabla h_i(\vec{x})$$</span>
-
-<h2 id="一般优化问题的一阶必要性条件—KKT_condition">一般优化问题的一阶必要性条件—KKT condition</h2>
-<span>$$\nabla f(\vec{x}) = \sum\lambda_i\nabla h_i(\vec{x}) + \sum_{\mu_j \geq 0}\mu_j\nabla g_j(\vec{x}) \\
-\mu_j g_j(\vec{x}) = 0，\quad \forall j$$</span>
-
-
-<p>无论优化问题是否有约束，一阶必要性条件在本质上是一样的，如果某点是极值点，那么在该点处一定不存在一个可行的下降（上升）方向使函数值减小（增大），这就是极值点的一阶必要性条件，以下2种情况可以满足该条件：</p>
-<ul>
-<li>函数在该点的梯度为0，典型的例子是无约束优化问题的一阶必要性条件；</li>
-<li>函数在该点的梯度不为0，但由于约束条件的存在，无法沿梯度方向移动来使函数值发生变化。</li>
-</ul>
-<p>先考虑只有一个等式约束的情况，此时自变量的可行域是一个约束面，假设<span>$\vec{x}$</span>最初位于<span>$\vec{x_0}$</span>处，那么此时<span>$\vec{x}$</span>的移动方向肯定不能与约束面的法向量方向平行，也不能包含法向量方向的分量，否则沿该方向移动将使得<span>$\vec{x}$</span>跳出约束面。所以，当目标函数的梯度方向与约束面在该点的法向量方向平行时，就找不到一个可行的合法的下降方向了（沿梯度方向移动才能下降）。用数学公式表达出来就是<span>$\nabla f(\vec{x}) = \lambda \nabla h(\vec{x})$</span>，这正是只含一个等式约束条件的一阶必要性条件。</p>
-<p>再考虑有多个等式约束的情况，此时自变量可行域为多个约束面的交集，如果目标函数的梯度恰好可以分解为约束面的法向量线性组合，那么，沿目标函数梯度方向的移动将会违背约束条件，所以，含多个等式约束的优化问题的一阶必要性条件为：<span>$\nabla f(\vec{x}) = \sum \lambda_i \nabla h_i(\vec{x})$</span></p>
-<p>最后考虑含不等式约束的情况，此时的可行域是由等式约束决定的约束面以及由不等式约束决定的区域的交集。要判定 <span>$\vec{x}$</span>是否是极值点，可分以下2种情况考虑：</p>
-<ol>
-<li><span>$\vec{x}$</span>位于区域边界上，此时不等式约束的等号恰好成立，此时的情况可以与等式约束类比，只不过在分解梯度的时候，限定了法向量的方向；</li>
-<li><span>$\vec{x}$</span>位于区域内部，此时的不等式约束对可行方向不具约束力，在分解梯度时无需考虑，因此对应的<span>$\mu_j=0$</span>，这也解释了为什么要满足互补条件。</li>
-</ol>
-<p>总结，优化问题的一阶必要性条件的实质是考察梯度条件，这也是为什么叫“一阶”必要性条件的原因。对于带约束的优化问题，只要将约束条件转化为对可行方向的约束，就能够比较直观地理解一阶必要性条件。</p>
-
+其中，$f(\vec{x})$是优化目标，$\vec{x}$是变量，$g(\vec{x})$是不等式约束，$h</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2014/07/05/kkt/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/07/05/kkt/" data-id="1qmil1k79ie0ed56" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lingdian618.github.io/2014/07/05/kkt/" data-id="84qu90xv48sl08dx" class="article-share-link">Share</a>  -->
       <!-- 文章的评论功能打开并且配置了disqus-->
       
       <!-- 显示文章标签 -->
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KKT/">KKT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nonlinear-Optimization/">Nonlinear Optimization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Numerical-Optimization/">Numerical Optimization</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KKT/">KKT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/optimization/">optimization</a></li></ul>
 
     </footer>
   </div>
@@ -559,37 +192,22 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
     <div class="article-entry" itemprop="articleBody">
       <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
-        <p>今天下午听了于剑老师关于聚类的讲座，下面简单总结下。</p>
-<h2 id="什么是聚类">什么是聚类</h2>
-<p>物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看<a href="http://baike.baidu.com/view/412596.htm" target="_blank" rel="external">这里</a>。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你把相似的分到同一组，不相似的分到不同的组，这个过程就是聚类。与聚类非常相似的一个概念是分类，一般来说，聚类属于无监督学习，分类属于有监督学习，二者的区别在于是否事先知道类别信息，举个例子，假设对一群人分组，如果事先告诉你要分成2组，一组男的，一组女的，那么这个问题就是分类问题，如果没有相关信息，只要你把这群人分成若干个组就行，那么这个问题就是聚类问题。</p>
-<h2 id="为何要聚类">为何要聚类</h2>
-<p>聚类能干什么呢？下面是于剑老师ppt上列出来的几点：</p>
-<ul>
-<li>When studying complex network, people hopes to find the community<br>with intrinsic relations（发现复杂网络中的社群结构）</li>
-<li>In image analysis,people hopes to segment an image into<br>homogeneous regions（将图像分割成同质区域）</li>
-<li>In text processing, people hopes to find document subsets with the<br>same topic（发现相同主题的文档）</li>
-<li>In lossy coding,people hopes to find an code with minimum<br>information loss（在有损编码中，寻找信息丢失最少的编码方式）</li>
-<li>In customer behavior analysis, people hopes to find homogeneous<br>customer groups in order to efficiently make an advertisement（对用户分层，从而更有效地打广告）</li>
-</ul>
-<h2 id="聚类分析的一般流程">聚类分析的一般流程</h2>
-<ul>
-<li>数据表示和数据预处理，包括数据清洗、特征提取、特征选择</li>
-<li>定义相似性，把对象之间的相似性用提取的特征体现出来</li>
-<li>聚类，选择某种聚类算法对数据进行划分</li>
-<li>性能评估，对聚类结果的好坏进行评价</li>
-</ul>
-<h2 id="聚类中的关键问题">聚类中的关键问题</h2>
-<ul>
-<li>相似性的定义。上个世纪60年代，模式识别研究的鼻祖之一，美籍日本学者渡边慧证明了<a href="http://baike.baidu.com/view/815246.htm" target="_blank" rel="external">“丑小鸭定理”</a>。这个定理说的是“丑小鸭与白天鹅之间的区别和两只白天鹅之间的区别一样大”。丑小鸭是白天鹅的幼雏，在画家的眼里，丑小鸭和白天鹅的区别大于两只白天鹅的区别；但是在遗传学家的眼里，丑小鸭与其父亲或母亲的差别小于父母之间的差别。由此引出的一个问题是，事物有没有“本质”？一个苹果，牛顿看到的是它的质量，遗传学家看到的是它的染色体中的DNA序列，美食家关心的是它的味道，画家看到的是它的颜色和形状，孔融还可能关注其大小并从中看出道德因素。这里面没有谁对谁错的问题，所以不可能知道苹果的“本质”是什么。在说到“本质”的时候，充其量说的只是“我认为最重要的特征”，只代表个人的立场，他人并没有赞同的充分理由。所以任何使用“本质”这个词汇所进行的论证都是靠不住的。如果一个哲学家说：“思维是人的本质，计算机不具备这种本质，所以机器不能思维。”这种论证只相当于说：“我认为计算机不能思维，所以计算机不能思维。”这当然不能成为有效的论证。问题就在于世界上还不存在能够判断什么是事物的本质的公认的有效方法。所以没法判断事物之间本质上是否相似，一切相似性定义都是主观的，都是面向具体问题的。</li>
-<li>聚类算法的设计。就目前而言，貌似没有什么放之四海皆准的聚类算法，大多数算法都得对数据的分布形式作出一定的假设。在设计聚类算法时，还存在另一个问题，数据在原空间的聚集形态可能跟实际不一致，可能需要将数据转换到另一个空间中，这个问题可以看成是特征处理的问题，也可以在设计聚类算法时考虑。听于老师说，现在很多人做聚类时把特征处理和聚类算法设计合成一个步骤，这样一来可以使特征与算法匹配得更好，从而得到更好的聚类效果。</li>
-<li>聚类结果的评估。要对一个聚类结果进行评估，就得有一个所谓的“参考答案”，但是，如果我们已经知道来聚类结果，那么也就没必要再做聚类来，这一矛盾给聚类结果的评估带来不少麻烦。</li>
-<li>如何建立聚类分析的公理化系统。这一问题貌似在机器学习中普遍存在，在机器学习中，我们做的很多事情都是基于“经验主义”，而非“理性主义”。要是在机器学习领域能够建立像牛顿力学中那样优美的三大定律公理化系统，那聚类分析的公理化系统应该也不是问题来。</li>
-</ul>
-
+        
+          <p itemprop="description" >今天下午听了于剑老师关于聚类的讲座，下面简单总结下。
+什么是聚类
+物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看这里。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你把相似的分到同一组，不相似的分到不同的组，这个过程就是聚类。与聚类非常相似的一个概念是分类，一般来说</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2014/06/18/cluster/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/06/18/cluster/" data-id="dfbectp8gm6auxb6" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lingdian618.github.io/2014/06/18/cluster/" data-id="tc3ylkvanm8mwvfs" class="article-share-link">Share</a>  -->
       <!-- 文章的评论功能打开并且配置了disqus-->
       
       <!-- 显示文章标签 -->
@@ -635,14 +253,21 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
     <div class="article-entry" itemprop="articleBody">
       <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
-        <p>话说自去年入学以来，印象中北京没下过几次雨，但这两天的暴雨提醒了我“北京看海”不是神话。经过昨晚一夜大雨，校园中那条小河水位暴涨，由于小河刚挖成不久，被暴雨这么一冲，“枯水渠”一夜之间变成了“小黄河”。窗外的青蛙在大雨过后也变得异常兴奋，呱呱叫个不停。此刻的我，正坐在宿舍，听着蛙声，准备总结下过去几周的生活。</p>
-<p>过去几周，可以说是研究生入学以来最忙碌的一段时间。把时间调回到一个月前，那时的我正忙于参加阿里巴巴的大数据竞赛。在5月初到5月中旬的那2周时间里，每天除了吃饭，睡觉，上课之外，就是做比赛。那段时间确实搞得比较凶，有时甚至不惜破戒12点后才睡觉，即使是这样，早上还经常7点不到就醒了，醒来的第一件事就是，抓过手机看排行榜。照这样的节奏过了大概有2周，然后有一天，上课的时候老师提到大作业的事情，我才意识到一大波考试和大作业即将来袭，而我还一点儿没准备。当时我就有了紧迫感，4门考试，4门大作业，而且时间都集中在5月底到6月初，也就是说3周时间要搞定4门考试和4门大作业，现在想想都有些后怕。由于时间紧迫，所以当天就决定暂时停止比赛，集中精力准备大作业和考试。在接下来的3周时间里，先后搞定了图像检索系统，深圳出租车GPS数据可视化系统以及中文文本自动分类系统3个大作业，其中可视化的那个大作业是组队完成的，队友相当给力。另外，值得庆幸的是，大数据的大作业被老师推迟到了6月底，而且队友说可以直接把他上的“高性能”那门课程的大作业移植过来，所以这也给了我不少喘息之机，否则真忙不过来。</p>
-<p>现在该忙的也基本忙完了，比赛也歇了一个多月，今天看了下阿里竞赛的排行榜，都快要掉出前100了，有点跟不上节奏了。不管怎么样，就当做着玩呗。给自己加油！</p>
-
+        
+          <p itemprop="description" >话说自去年入学以来，印象中北京没下过几次雨，但这两天的暴雨提醒了我“北京看海”不是神话。经过昨晚一夜大雨，校园中那条小河水位暴涨，由于小河刚挖成不久，被暴雨这么一冲，“枯水渠”一夜之间变成了“小黄河”。窗外的青蛙在大雨过后也变得异常兴奋，呱呱叫个不停。此刻的我，正坐在宿舍，听着蛙声，准备总结下过去几周的生活。
+过去几周，可以说是研究生入学以来最忙碌的一段时间。把时间调回到一个月前，那时的我正忙于参</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2014/06/16/summary/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/06/16/summary/" data-id="47h02swxm8edhk5a" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lingdian618.github.io/2014/06/16/summary/" data-id="1c71s5w0oqnohqaf" class="article-share-link">Share</a>  -->
       <!-- 文章的评论功能打开并且配置了disqus-->
       
       <!-- 显示文章标签 -->
@@ -657,255 +282,29 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 
 
   
-    <article id="post-雁栖湖" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-an_probability_problem" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <!-- 文章日期 -->
-    <a href="/2014/03/15/雁栖湖/" class="article-date">
-  <time datetime="2014-03-14T16:00:00.000Z" itemprop="datePublished">Mar 15 2014</time>
+    <a href="/2014/01/15/an_probability_problem/" class="article-date">
+  <time datetime="2014-01-14T16:00:00.000Z" itemprop="datePublished">Jan 15 2014</time>
 </a>
     <!-- 文章类别 -->
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/相册/">相册</a>
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
   </div>
 
   </div>
   <div class="article-inner">
     <!-- 文章开头的fancybox照片 -->
     
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0742.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0742.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0743.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0743.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0744.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0744.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0745.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0745.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0746.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0746.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0747.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0747.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0748.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0748.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0749.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0749.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0750.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0750.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0751.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0751.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0752.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0752.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0753.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0753.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0754.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0754.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0755.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0755.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0756.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0756.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0757.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0757.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0758.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0758.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0759.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0759.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0760.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0760.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0761.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0761.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0762.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0762.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0763.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0763.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0764.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0764.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0765.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0765.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0766.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0766.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0767.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0767.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0768.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0768.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0769.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0769.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0770.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0770.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0771.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0771.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0772.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0772.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0773.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0773.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0774.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0774.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0775.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0775.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0776.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0776.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0777.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0777.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0778.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0778.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0779.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0779.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0780.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0780.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0781.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0781.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0782.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0782.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0783.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0783.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0784.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0784.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0785.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0785.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0786.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0786.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0787.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0787.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0788.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0788.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0789.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0789.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0790.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0790.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0791.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0791.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0792.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0792.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0793.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0793.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0794.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0794.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0795.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0795.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0796.JPG?imageView2/2/w/512/q/85" rel="gallery_g1dxntmn4cqnxg2a">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-01-18/IMG_0796.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
     
       <header class="article-header">
         <!-- 文章标题 -->
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/03/15/雁栖湖/">雁栖湖</a>
+      <a class="article-title" href="/2014/01/15/an_probability_problem/">一个有意思的概率问题</a>
     </h1>
   
 
@@ -915,15 +314,25 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
       <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
         
+          <p itemprop="description" >引入问题
+在书上看到一个有意思的问题，不知从何说起，举个栗子，话说临近期末，小明闲来无事，想起了炒股，但他对股市知之甚少，于是他打算请个专家来指导他，为了确保专家质量，他决定对50个“专家”进行考核，选取表现最好的，考核方式如下：让专家们在接下来的连续10天内对某只特定股的涨跌进行独立预测（只预测“涨”或“跌”），10天过后，如果表现最好的专家正确率高于80%，那么就选他，否则说明这批专家太水了，</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2014/01/15/an_probability_problem/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/03/15/雁栖湖/" data-id="g1dxntmn4cqnxg2a" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lingdian618.github.io/2014/01/15/an_probability_problem/" data-id="e1g4j0ket5tty8m6" class="article-share-link">Share</a>  -->
       <!-- 文章的评论功能打开并且配置了disqus-->
       
       <!-- 显示文章标签 -->
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/photo/">photo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travel/">travel</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/probability/">probability</a></li></ul>
 
     </footer>
   </div>
@@ -933,147 +342,29 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 
 
   
-    <article id="post-野长城" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-summary2013" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <!-- 文章日期 -->
-    <a href="/2014/03/15/野长城/" class="article-date">
-  <time datetime="2014-03-14T16:00:00.000Z" itemprop="datePublished">Mar 15 2014</time>
+    <a href="/2014/01/01/summary2013/" class="article-date">
+  <time datetime="2013-12-31T16:00:00.000Z" itemprop="datePublished">Jan 1 2014</time>
 </a>
     <!-- 文章类别 -->
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/相册/">相册</a>
+    <a class="article-category-link" href="/categories/生活点滴/">生活点滴</a>
   </div>
 
   </div>
   <div class="article-inner">
     <!-- 文章开头的fancybox照片 -->
     
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0920.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0920.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0921.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0921.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0922.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0922.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0923.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0923.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0924.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0924.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0925.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0925.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0926.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0926.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0934.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0934.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0935.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0935.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0938.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0938.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0943.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0943.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0944.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0944.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0945.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0945.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0946.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0946.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0947.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0947.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0948.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0948.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0953.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0953.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0959.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0959.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0964.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0964.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0965.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0965.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0968.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0968.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0981.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0981.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0982.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0982.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0983.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0983.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0984.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0984.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0985.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0985.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0991.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_0991.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_1008.JPG?imageView2/2/w/512/q/85" rel="gallery_trw02fotmutl2udi">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-03-15/IMG_1008.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
     
       <header class="article-header">
         <!-- 文章标题 -->
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/03/15/野长城/">野长城</a>
+      <a class="article-title" href="/2014/01/01/summary2013/">往者不可谏，来者犹可追</a>
     </h1>
   
 
@@ -1083,15 +374,25 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
       <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
         
+          <p itemprop="description" >感冒了，看了一上午电影，睡了一下午，眼看2014年的第一天就要这样宅过去了，但似乎又没有更好的安排，好吧，宅就宅吧，但好歹做点比睡觉更有意义的事情吧，于是写点东西吧。
+回首过去的一年，值得记录的各种大事、小事也不多，对我来说称得上大事的可能就是考研、毕业、研究生入学吧。关于考研，印象最深的莫过于选择考中科院的勇气以及准备初试的那段时光了，我的勇气说出来可能有点可笑，“给自己一个创造奇迹的机会”，想</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2014/01/01/summary2013/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/03/15/野长城/" data-id="trw02fotmutl2udi" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lingdian618.github.io/2014/01/01/summary2013/" data-id="vttfxqfnxru6j2v8" class="article-share-link">Share</a>  -->
       <!-- 文章的评论功能打开并且配置了disqus-->
       
       <!-- 显示文章标签 -->
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/photo/">photo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travel/">travel</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/summary/">summary</a></li></ul>
 
     </footer>
   </div>
@@ -1101,163 +402,29 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 
 
   
-    <article id="post-青龙峡" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-DCT" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <!-- 文章日期 -->
-    <a href="/2014/03/15/青龙峡/" class="article-date">
-  <time datetime="2014-03-14T16:00:00.000Z" itemprop="datePublished">Mar 15 2014</time>
+    <a href="/2013/11/03/DCT/" class="article-date">
+  <time datetime="2013-11-02T16:00:00.000Z" itemprop="datePublished">Nov 3 2013</time>
 </a>
     <!-- 文章类别 -->
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/相册/">相册</a>
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
   </div>
 
   </div>
   <div class="article-inner">
     <!-- 文章开头的fancybox照片 -->
     
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1039.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1039.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1040.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1040.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1043.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1043.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1044.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1044.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1045.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1045.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1046.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1046.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1047.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1047.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1048.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1048.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1049.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1049.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1052.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1052.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1053.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1053.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1054.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1054.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1055.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1055.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1056.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1056.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1057.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1057.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1058.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1058.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1069.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1069.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1070.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1070.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1071.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1071.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1072.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1072.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1073.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1073.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1074.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1074.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1075.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1075.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1076.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1076.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1077.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1077.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1078.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1078.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1079.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1079.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1080.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1080.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1081.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1081.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1082.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1082.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1083.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1083.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-      <a class="article-gallery-img fancybox" href="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1084.JPG?imageView2/2/w/512/q/85" rel="gallery_1u3np2ioq8wba6ia">
-        <img src="http://lingdian618subset.qiniudn.com/images/2014-04-05/IMG_1084.JPG?imageView2/2/w/512/q/85" itemprop="image">
-      </a>
-    
-  </div>
-</div>
-
     
       <header class="article-header">
         <!-- 文章标题 -->
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/03/15/青龙峡/">青龙峡</a>
+      <a class="article-title" href="/2013/11/03/DCT/">离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系</a>
     </h1>
   
 
@@ -1267,15 +434,28 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
       <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
         
+          <p itemprop="description" >理解DCT与DFT之间关系的关键几点
+
+偶函数的DFT结果只包含余弦项；
+对长度有限的数字信号，可以通过偶延拓和周期延拓，然后进行适当平移得到偶函数信号；
+偶延拓时使用不同的边界处理方法将得到不同的离散余弦变换；通常按以下方法处理边界：设原信号为{1 2 3 4}，通过偶延拓处理得到{1 2 3 4 4 3 2 1}，然后再进行周期延拓，x(n)=x(n-8)，此时我们发现x(-1)=x(7)=1</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2013/11/03/DCT/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lingdian618.github.io/2014/03/15/青龙峡/" data-id="1u3np2ioq8wba6ia" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lingdian618.github.io/2013/11/03/DCT/" data-id="fhp72pc4zvo50wda" class="article-share-link">Share</a>  -->
       <!-- 文章的评论功能打开并且配置了disqus-->
       
       <!-- 显示文章标签 -->
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/photo/">photo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travel/">travel</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DCT/">DCT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFT/">DFT</a></li></ul>
 
     </footer>
   </div>
@@ -1285,10 +465,127 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 
 
   
+    <article id="post-polyDFT" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <!-- 文章日期 -->
+    <a href="/2013/10/21/polyDFT/" class="article-date">
+  <time datetime="2013-10-20T16:00:00.000Z" itemprop="datePublished">Oct 21 2013</time>
+</a>
+    <!-- 文章类别 -->
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    <!-- 文章开头的fancybox照片 -->
+    
+    
+      <header class="article-header">
+        <!-- 文章标题 -->
+        
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/10/21/polyDFT/">多项式乘法与离散傅里叶变换（DFT）的关系</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
+      
+        
+          <p itemprop="description" >离散傅里叶变换是数字信号处理中的重要内容，然而但从公式出发很难获得比较直观的理解。在工程上，我们一般将其理解为，一个长度有限的数字信号可以分解为有限个离散三角函数信号，这样一来DFT的物理意义和相关性质就比较清晰，对DFT的一些性质我们无需从公式出发进行数学推导，可以根据物理意义来理解。比如数字信号在时域的平移可以看成是有限个三角函数信号的平移，而三角函数信号的平移其时就是相位变化，对应的就是是频</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2013/10/21/polyDFT/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
+      
+    </div>
+    <footer class="article-footer">
+    <!--  <a data-url="http://lingdian618.github.io/2013/10/21/polyDFT/" data-id="bruohhv1ovb80vzx" class="article-share-link">Share</a>  -->
+      <!-- 文章的评论功能打开并且配置了disqus-->
+      
+      <!-- 显示文章标签 -->
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFT/">DFT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DIP/">DIP</a></li></ul>
+
+    </footer>
+  </div>
+  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
+  
+</article>
+
+
+  
+    <article id="post-correlation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <!-- 文章日期 -->
+    <a href="/2013/10/14/correlation/" class="article-date">
+  <time datetime="2013-10-13T16:00:00.000Z" itemprop="datePublished">Oct 14 2013</time>
+</a>
+    <!-- 文章类别 -->
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    <!-- 文章开头的fancybox照片 -->
+    
+    
+      <header class="article-header">
+        <!-- 文章标题 -->
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/10/14/correlation/">对相关性的理解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
+      
+        
+          <p itemprop="description" >何为相关性
+“相关性”这个词，在数据分析中很常见，数据之间的相关性对应的是事物之间的联系。比如说，人群身高数据和体重数据之间的相关性反映的是身高与体重之间的联系。说到相关性，就不得不提到因果关系，事物之间的因果关系是一种特殊的联系，而相关性则更为普遍。因果关系是一种确定的关系，而相关性是一种非确定的关系，只是统计上的结论。
+为何要进行相关性分析？
+根据马克思主义的观点，事物之间的联系是普遍的，科学</p>
+        
+        <!-- 主题配置中的excerpt_link为 Read More -->
+        
+          <p class="article-more-link">
+            <a href="/2013/10/14/correlation/#more">Read More</a>
+          </p>
+        
+      <!-- 没有摘要或者不是索引页面时就显示全文 -->
+      
+    </div>
+    <footer class="article-footer">
+    <!--  <a data-url="http://lingdian618.github.io/2013/10/14/correlation/" data-id="wsnwtt46krswc4x1" class="article-share-link">Share</a>  -->
+      <!-- 文章的评论功能打开并且配置了disqus-->
+      
+      <!-- 显示文章标签 -->
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/correlation/">correlation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/similarity/">similarity</a></li></ul>
+
+    </footer>
+  </div>
+  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
+  
+</article>
+
+
+  
   
 </section>
         
@@ -1298,7 +595,7 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/相册/">相册</a><span class="category-list-count">9</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -1307,7 +604,7 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DCT/">DCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFT/">DFT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digit-image-process/">Digit image process</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Introduction-to-algorithm/">Introduction to algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KKT/">KKT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nonlinear-Optimization/">Nonlinear Optimization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numerical-Optimization/">Numerical Optimization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clustering/">clustering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/correlation/">correlation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/probability/">probability</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qiniu/">qiniu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/similarity/">similarity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/summary/">summary</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/">travel</a><span class="tag-list-count">8</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DCT/">DCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFT/">DFT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIP/">DIP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KKT/">KKT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clustering/">clustering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/correlation/">correlation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/">optimization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/probability/">probability</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/similarity/">similarity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/summary/">summary</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -1316,7 +613,7 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -1328,23 +625,23 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
       <ul>
         
           <li>
-            <a href="/2014/11/21/手机照片整理/">手机照片整理</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/05/颐和园/">颐和园</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/01/圆明园/">圆明园</a>
-          </li>
-        
-          <li>
-            <a href="/2014/09/07/奥林匹克公园/">奥林匹克公园</a>
-          </li>
-        
-          <li>
             <a href="/2014/07/05/kkt/">对KKT条件的理解</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/18/cluster/">聚类中的关键问题--于剑老师讲座总结</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/16/summary/">近期总结</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/15/an_probability_problem/">一个有意思的概率问题</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/01/summary2013/">往者不可谏，来者犹可追</a>
           </li>
         
       </ul>
