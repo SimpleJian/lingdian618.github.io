@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lingdian618.github.io/"/>
-  <updated>2014-11-22T12:37:14.303Z</updated>
+  <updated>2014-11-22T12:43:20.048Z</updated>
   <id>http://lingdian618.github.io/</id>
   
   <author>
@@ -13,6 +13,44 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[手机照片整理]]></title>
+    <link href="http://lingdian618.github.io/2014/11/21/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E6%95%B4%E7%90%86/"/>
+    <id>http://lingdian618.github.io/2014/11/21/手机照片整理/</id>
+    <published>2014-11-21T14:11:13.000Z</published>
+    <updated>2014-11-21T14:11:13.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="问题由来">问题由来</h2>
+<p>手机里的照片从没好好整理过，每次拍完照之后都很少再看，这样日积月累，手机空间都快不够了。正好最近在折腾hexo博客，于是有了把一些照片发布到博客的想法。要把照片发布到博客，就得考虑以下一些问题：</p>
+<ul>
+<li>分类问题，由于照片太多了，一张张去找要发布照片就太麻烦了。而且有些照片都忘了啥时候拍的，如果能对其进行分类，同时贴上时间标签，那就方便多了；</li>
+<li>空间问题，照片总共好几个G，如何存储就是个问题，云存储是个不错选择。</li>
+</ul>
+<h2 id="方案及实现">方案及实现</h2>
+<p>基本想法是这样的，首先把照片从手机中copy到电脑上，然后用脚本对照片按时间进行初步分类，将同一天拍摄的照片放到同一个文件夹中，一般来说，照片都是放假出去玩的时候拍的，同一主题的照片在时间上相对集中，按时间分类后找起来方便点。在发布照片到博客时，把要发布的照片上传到云存储空间，然后在博客中引用外链即可。</p>
+<h3 id="照片分类">照片分类</h3>
+<p>分类的标准有多个，按时间分类是最容易用脚本实现的，但最适合发布博客的应该是按主题分类，而按主题分类实在太麻烦（涉及图片高层语义），考虑到同一主题的照片在拍摄时间上一般是连续的，所以最终决定初步按时间分类，在发布时根据需要按时间查找相应照片。下面是按时间分类的脚本实现：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="shebang">#! /bin/bash</span></div><div class="line"><span class="comment"># 尚未分类的照片目录</span></div><div class="line">src_dir=<span class="variable">$1</span></div><div class="line"><span class="comment"># 分类照片存储目录</span></div><div class="line">dst_dir=<span class="variable">$2</span></div><div class="line"><span class="comment"># 遍历src_dir中的所有照片</span></div><div class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> ` ls <span class="operator">-l</span> <span class="variable">$src_dir</span> | grep <span class="string">'^-'</span> | egrep -io <span class="string">'\w+\.(bmp|jpg|png|gif)$'</span> `</div><div class="line"><span class="keyword">do</span></div><div class="line">  <span class="comment"># 获取照片拍摄日期，根据日期在dst_dir中创建子目录，并将照片复制到相应目录</span></div><div class="line">  new_dir=` exiv2 <span class="variable">$src_dir</span>/<span class="variable">$filename</span> | egrep -o <span class="string">'[0-9]{4}:[0-9]{2}:[0-9]{2}'</span> | sed <span class="string">'s/:/-/g'</span> `</div><div class="line">  mkdir -p <span class="variable">$dst_dir</span>/<span class="variable">$new_dir</span></div><div class="line">  cp <span class="variable">$src_dir</span>/<span class="variable">$filename</span> <span class="variable">$dst_dir</span>/<span class="variable">$new_dir</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+
+<h3 id="云存储空间">云存储空间</h3>
+<p>存储空间我选择了七牛云存储，原因很简单：免费，简单易用。实名注册成为标准用户后就能免费获得10G的空间和10G/月的下载流量，这对一般用户来说完全够用了。注册成功后就可以新建空间，上传文件了，具体操作可以参考<a href="https://portal.qiniu.com/tutorial/index" target="_blank" rel="external">=&gt;这里&lt;=</a>。若需要上传的文件太多或者太大，可以考虑使用七牛提供的同步工具<a href="http://developer.qiniu.com/docs/v6/tools/qrsync.html" target="_blank" rel="external">qrsync</a>。在博客中要使用照片时，直接引用公开空间中文件的外链地址即可。如果说原图太大，七牛提供了一些数据处理的功能，通过新建图片样式就能获得原图的缩略图。最后贴一下我的<a href="https://portal.qiniu.com/signup?code=3lffq2l27ktoy" target="_blank" rel="external">邀请链接</a>。</p>
+<h2 id="其他">其他</h2>
+<p>在上传照片到云空间，以及发布照片到博客的过程中，要时刻有保护个人隐私的意识（特别是批量上传时），要是一不小心把一些不该上传的东西上传到了公开空间甚至发布到博客，那就一世清名毁于一旦了……</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="问题由来">问题由来</h2>
+<p>手机里的照片从没好好整理过，每次拍完照之后都很少再看，这样日积月累，手机空间都快不够了。正好最近在折腾hexo博客，于是有了把一些照片发布到博客的想法。要把照片发布到博客，就得考虑以下一些问题：</p>
+<ul>
+<li>分类]]>
+    </summary>
+    
+      <category term="bash" scheme="http://lingdian618.github.io/tags/bash/"/>
+    
+      <category term="qiniu" scheme="http://lingdian618.github.io/tags/qiniu/"/>
+    
+      <category term="其他" scheme="http://lingdian618.github.io/categories/%E5%85%B6%E4%BB%96/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[对KKT条件的理解]]></title>
