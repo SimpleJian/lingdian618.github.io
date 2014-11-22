@@ -1,31 +1,36 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-Hans">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>聚类中的关键问题--于剑老师讲座总结 | Just follow your heart</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="Lijian">
-    
-    <meta name="description" content="今天下午听了于剑老师关于聚类的讲座，下面简单总结下。
+  <title>聚类中的关键问题--于剑老师讲座总结 | Lijian&#39;s Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天下午听了于剑老师关于聚类的讲座，下面简单总结下。
 什么是聚类
-物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看这里。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你">
-    
-    
-    
-    
-    <link rel="alternate" href="/atom.xml" title="Just follow your heart" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/little.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看这里。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你把相似的分到同一组，不相似的分到不同的组，这个过程就是聚类。与聚类非常相似的一个概念是分类，一般来说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聚类中的关键问题--于剑老师讲座总结">
+<meta property="og:url" content="http://lingdian618.github.io/2014/06/18/cluster/">
+<meta property="og:site_name" content="Lijian's Site">
+<meta property="og:description" content="今天下午听了于剑老师关于聚类的讲座，下面简单总结下。
+什么是聚类
+物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看这里。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你把相似的分到同一组，不相似的分到不同的组，这个过程就是聚类。与聚类非常相似的一个概念是分类，一般来说">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聚类中的关键问题--于剑老师讲座总结">
+<meta name="twitter:description" content="今天下午听了于剑老师关于聚类的讲座，下面简单总结下。
+什么是聚类
+物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看这里。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你把相似的分到同一组，不相似的分到不同的组，这个过程就是聚类。与聚类非常相似的一个概念是分类，一般来说">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Lijian&#39;s Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
 
 <!-- mathjax config similar to math.stackexchange -->
 
@@ -58,72 +63,76 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 </head>
-
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/cat.svg" alt="Just follow your heart" title="Just follow your heart"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Just follow your heart">Just follow your heart</a></h1>
-				<h2 class="blog-motto">Everything is possible if you have the real passion to what you do</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-						<li><a href="/categories/相册">Gallery</a></li>
-					
-						<li><a href="/About">About</a></li>
-					
-					<li>
-					
-					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/06/18/cluster/" title="聚类中的关键问题--于剑老师讲座总结" itemprop="url">聚类中的关键问题--于剑老师讲座总结</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="http://lingdian618.github.io" title="Lijian">Lijian</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2014-06-17T16:00:00.000Z" itemprop="datePublished">Jun 18 2014</time>
-    Updated:<time datetime="2014-10-31T14:05:56.000Z" itemprop="dateModified">Oct 31 2014</time>
-    
-  </p>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lijian&#39;s Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Everything is possible if you have the real passion to what you do</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://lingdian618.github.io"></form>
+      </div>
+    </div>
+  </div>
 </header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是聚类"><span class="toc-number">1.</span> <span class="toc-text">什么是聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为何要聚类"><span class="toc-number">2.</span> <span class="toc-text">为何要聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#聚类分析的一般流程"><span class="toc-number">3.</span> <span class="toc-text">聚类分析的一般流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#聚类中的关键问题"><span class="toc-number">4.</span> <span class="toc-text">聚类中的关键问题</span></a></li></ol>
-		</div>
-		
-		<p>今天下午听了于剑老师关于聚类的讲座，下面简单总结下。</p>
+      <div class="outer">
+        <section id="main"><article id="post-cluster" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <!-- 文章日期 -->
+    <a href="/2014/06/18/cluster/" class="article-date">
+  <time datetime="2014-06-17T16:00:00.000Z" itemprop="datePublished">Jun 18 2014</time>
+</a>
+    <!-- 文章类别 -->
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    <!-- 文章开头的fancybox照片 -->
+    
+    
+      <header class="article-header">
+        <!-- 文章标题 -->
+        
+  
+    <h1 class="article-title" itemprop="name">
+      聚类中的关键问题--于剑老师讲座总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
+      
+        <p>今天下午听了于剑老师关于聚类的讲座，下面简单总结下。</p>
 <h2 id="什么是聚类">什么是聚类</h2>
 <p>物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看<a href="http://baike.baidu.com/view/412596.htm" target="_blank" rel="external">这里</a>。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你把相似的分到同一组，不相似的分到不同的组，这个过程就是聚类。与聚类非常相似的一个概念是分类，一般来说，聚类属于无监督学习，分类属于有监督学习，二者的区别在于是否事先知道类别信息，举个例子，假设对一群人分组，如果事先告诉你要分成2组，一组男的，一组女的，那么这个问题就是分类问题，如果没有相关信息，只要你把这群人分成若干个组就行，那么这个问题就是聚类问题。</p>
 <h2 id="为何要聚类">为何要聚类</h2>
@@ -149,294 +158,151 @@
 <li>聚类结果的评估。要对一个聚类结果进行评估，就得有一个所谓的“参考答案”，但是，如果我们已经知道来聚类结果，那么也就没必要再做聚类来，这一矛盾给聚类结果的评估带来不少麻烦。</li>
 <li>如何建立聚类分析的公理化系统。这一问题貌似在机器学习中普遍存在，在机器学习中，我们做的很多事情都是基于“经验主义”，而非“理性主义”。要是在机器学习领域能够建立像牛顿力学中那样优美的三大定律公理化系统，那聚类分析的公理化系统应该也不是问题来。</li>
 </ul>
-  
-	</div>
-		<footer class="article-footer clearfix">
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/clustering/">clustering</a><a href="/tags/summary/">summary</a>
+      
+    </div>
+    <footer class="article-footer">
+    <!--  <a data-url="http://lingdian618.github.io/2014/06/18/cluster/" data-id="dfbectp8gm6auxb6" class="article-share-link">Share</a>  -->
+      <!-- 文章的评论功能打开并且配置了disqus-->
+      
+      <!-- 显示文章标签 -->
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/clustering/">clustering</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/summary/">summary</a></li></ul>
+
+    </footer>
   </div>
-
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://lingdian618.github.io/2014/06/18/cluster/" data-title="聚类中的关键问题--于剑老师讲座总结 | Just follow your heart" data-tsina="lijian430421" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2014/07/05/kkt/" title="对KKT条件的理解">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  对KKT条件的理解</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2014/06/16/summary/"  title="近期总结">
- <strong>NEXT:</strong><br/> 
- <span>近期总结
-</span>
-</a>
-</div>
-
+  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/07/05/kkt/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          对KKT条件的理解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/06/16/summary/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">近期总结</div>
+    </a>
+  
 </nav>
 
-	
-<section class="comment">
-	<div class="ds-thread"></div>
-</section>
-
-</div>  
-
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是聚类"><span class="toc-number">1.</span> <span class="toc-text">什么是聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为何要聚类"><span class="toc-number">2.</span> <span class="toc-text">为何要聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#聚类分析的一般流程"><span class="toc-number">3.</span> <span class="toc-text">聚类分析的一般流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#聚类中的关键问题"><span class="toc-number">4.</span> <span class="toc-text">聚类中的关键问题</span></a></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
   
-<div class="categorieslist">
-	<p class="asidetitle">Categories</p>
-		<ul>
-		
-			<li><a href="/categories/其他/" title="其他">其他<sup>1</sup></a></li>
-		
-			<li><a href="/categories/学习笔记/" title="学习笔记">学习笔记<sup>6</sup></a></li>
-		
-			<li><a href="/categories/生活点滴/" title="生活点滴">生活点滴<sup>2</sup></a></li>
-		
-			<li><a href="/categories/相册/" title="相册">相册<sup>9</sup></a></li>
-		
-		</ul>
-</div>
+</article>
 
 
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/DCT/" title="DCT">DCT<sup>1</sup></a></li>
-		
-			<li><a href="/tags/DFT/" title="DFT">DFT<sup>2</sup></a></li>
-		
-			<li><a href="/tags/Digit-image-process/" title="Digit image process">Digit image process<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Introduction-to-algorithm/" title="Introduction to algorithm">Introduction to algorithm<sup>1</sup></a></li>
-		
-			<li><a href="/tags/KKT/" title="KKT">KKT<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Nonlinear-Optimization/" title="Nonlinear Optimization">Nonlinear Optimization<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Numerical-Optimization/" title="Numerical Optimization">Numerical Optimization<sup>1</sup></a></li>
-		
-			<li><a href="/tags/bash/" title="bash">bash<sup>1</sup></a></li>
-		
-			<li><a href="/tags/clustering/" title="clustering">clustering<sup>1</sup></a></li>
-		
-			<li><a href="/tags/correlation/" title="correlation">correlation<sup>1</sup></a></li>
-		
-			<li><a href="/tags/math/" title="math">math<sup>2</sup></a></li>
-		
-			<li><a href="/tags/photo/" title="photo">photo<sup>9</sup></a></li>
-		
-			<li><a href="/tags/probability/" title="probability">probability<sup>1</sup></a></li>
-		
-			<li><a href="/tags/qiniu/" title="qiniu">qiniu<sup>1</sup></a></li>
-		
-			<li><a href="/tags/similarity/" title="similarity">similarity<sup>1</sup></a></li>
-		
-			<li><a href="/tags/summary/" title="summary">summary<sup>3</sup></a></li>
-		
-			<li><a href="/tags/travel/" title="travel">travel<sup>8</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-  <div class="archiveslist">
-    <p class="asidetitle"><a href="/archives">Archives</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">1</span></li></ul>
-  </div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">Links</p>
-    <ul>
-      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
-      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
-    </ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hello, I&#39;m Lijian, a graduate student in Beijing. <br/>
-			Welcome to this blog, enjoy yourself!</p>
-	</section>
-	 
-	<div class="social-font clearfix">
-		
-		<a href="http://weibo.com/1857370020" target="_blank" title="weibo"></a>
-		
-		
-		
-		<a href="https://github.com/lingdian618" target="_blank" title="github"></a>
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
-		
-		<a href="http://lingdian618.github.io" target="_blank" title="Lijian">Lijian</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-cluster" data-title="聚类中的关键问题--于剑老师讲座总结" data-url="http://lingdian618.github.io/2014/06/18/cluster/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'lingdian618'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
         
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/相册/">相册</a><span class="category-list-count">9</span></li></ul>
+    </div>
+  </div>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DCT/">DCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFT/">DFT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digit-image-process/">Digit image process</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Introduction-to-algorithm/">Introduction to algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KKT/">KKT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nonlinear-Optimization/">Nonlinear Optimization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numerical-Optimization/">Numerical Optimization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clustering/">clustering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/correlation/">correlation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/probability/">probability</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qiniu/">qiniu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/similarity/">similarity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/summary/">summary</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/">travel</a><span class="tag-list-count">8</span></li></ul>
+    </div>
+  </div>
 
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/11/21/手机照片整理/">手机照片整理</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/05/颐和园/">颐和园</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/01/圆明园/">圆明园</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/07/奥林匹克公园/">奥林匹克公园</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/05/kkt/">对KKT条件的理解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
 
+  
+</aside>
+        
+      </div>
+      <!-- 页脚，powered by …… -->
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 Lijian<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <!-- 移动端？ -->
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    <!-- 评论框，js包含 -->
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
@@ -444,21 +310,10 @@ $(document).ready(function(){
   <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 
 
+
 <script src="/js/script.js" type="text/javascript"></script>
 
 
-
-
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-56312238-1', 'lijian.ml');  
-ga('send', 'pageview');
-</script>
-
-
-  </body>
+  </div>
+</body>
 </html>
-
