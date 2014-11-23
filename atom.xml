@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lingdian618.github.io/"/>
-  <updated>2014-11-22T12:43:20.048Z</updated>
+  <updated>2014-11-23T13:18:07.355Z</updated>
   <id>http://lingdian618.github.io/</id>
   
   <author>
@@ -108,11 +108,11 @@ s.t. ]]>
   </entry>
   
   <entry>
-    <title><![CDATA[聚类中的关键问题--于剑老师讲座总结]]></title>
+    <title><![CDATA[聚类中的关键问题--于剑老师讲座报告]]></title>
     <link href="http://lingdian618.github.io/2014/06/18/cluster/"/>
     <id>http://lingdian618.github.io/2014/06/18/cluster/</id>
     <published>2014-06-17T16:00:00.000Z</published>
-    <updated>2014-10-31T14:05:56.000Z</updated>
+    <updated>2014-11-22T12:58:00.000Z</updated>
     <content type="html"><![CDATA[<p>今天下午听了于剑老师关于聚类的讲座，下面简单总结下。</p>
 <h2 id="什么是聚类">什么是聚类</h2>
 <p>物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看<a href="http://baike.baidu.com/view/412596.htm" target="_blank" rel="external">这里</a>。“聚类”这个词应该是取自这个成语，在台湾，“聚类”也叫“分群”。现在的问题是，给你一堆人或者一堆东西，要你把相似的分到同一组，不相似的分到不同的组，这个过程就是聚类。与聚类非常相似的一个概念是分类，一般来说，聚类属于无监督学习，分类属于有监督学习，二者的区别在于是否事先知道类别信息，举个例子，假设对一群人分组，如果事先告诉你要分成2组，一组男的，一组女的，那么这个问题就是分类问题，如果没有相关信息，只要你把这群人分成若干个组就行，那么这个问题就是聚类问题。</p>
