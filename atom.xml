@@ -3,21 +3,21 @@
   <title><![CDATA[Lijian's Site]]></title>
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://lingdian618.github.io/"/>
-  <updated>2014-11-24T13:38:31.568Z</updated>
-  <id>http://lingdian618.github.io/</id>
+  <link href="http://lijian.ml/"/>
+  <updated>2014-11-24T13:56:14.532Z</updated>
+  <id>http://lijian.ml/</id>
   
   <author>
     <name><![CDATA[Lijian]]></name>
-    <email><![CDATA[jian.li@nlpr.ia.ac.cn]]></email>
+    <email><![CDATA[lijian430421@gmail.com]]></email>
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
     <title><![CDATA[手机照片整理]]></title>
-    <link href="http://lingdian618.github.io/2014/11/21/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E6%95%B4%E7%90%86/"/>
-    <id>http://lingdian618.github.io/2014/11/21/手机照片整理/</id>
+    <link href="http://lijian.ml/2014/11/21/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E6%95%B4%E7%90%86/"/>
+    <id>http://lijian.ml/2014/11/21/手机照片整理/</id>
     <published>2014-11-21T14:11:13.000Z</published>
     <updated>2014-11-21T14:11:13.000Z</updated>
     <content type="html"><![CDATA[<h2 id="问题由来">问题由来</h2>
@@ -44,18 +44,18 @@
 <li>分类]]>
     </summary>
     
-      <category term="bash" scheme="http://lingdian618.github.io/tags/bash/"/>
+      <category term="bash" scheme="http://lijian.ml/tags/bash/"/>
     
-      <category term="qiniu" scheme="http://lingdian618.github.io/tags/qiniu/"/>
+      <category term="qiniu" scheme="http://lijian.ml/tags/qiniu/"/>
     
-      <category term="其他" scheme="http://lingdian618.github.io/categories/%E5%85%B6%E4%BB%96/"/>
+      <category term="其他" scheme="http://lijian.ml/categories/%E5%85%B6%E4%BB%96/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[对KKT条件的理解]]></title>
-    <link href="http://lingdian618.github.io/2014/07/05/kkt/"/>
-    <id>http://lingdian618.github.io/2014/07/05/kkt/</id>
+    <link href="http://lijian.ml/2014/07/05/kkt/"/>
+    <id>http://lijian.ml/2014/07/05/kkt/</id>
     <published>2014-07-04T16:00:00.000Z</published>
     <updated>2014-11-22T12:31:45.000Z</updated>
     <content type="html"><![CDATA[<h2 id="带约束的数值优化问题">带约束的数值优化问题</h2>
@@ -97,20 +97,20 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 s.t. ]]>
     </summary>
     
-      <category term="math" scheme="http://lingdian618.github.io/tags/math/"/>
+      <category term="math" scheme="http://lijian.ml/tags/math/"/>
     
-      <category term="optimization" scheme="http://lingdian618.github.io/tags/optimization/"/>
+      <category term="optimization" scheme="http://lijian.ml/tags/optimization/"/>
     
-      <category term="KKT" scheme="http://lingdian618.github.io/tags/KKT/"/>
+      <category term="KKT" scheme="http://lijian.ml/tags/KKT/"/>
     
-      <category term="学习笔记" scheme="http://lingdian618.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="http://lijian.ml/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[聚类中的关键问题--于剑老师讲座报告]]></title>
-    <link href="http://lingdian618.github.io/2014/06/18/cluster/"/>
-    <id>http://lingdian618.github.io/2014/06/18/cluster/</id>
+    <link href="http://lijian.ml/2014/06/18/cluster/"/>
+    <id>http://lijian.ml/2014/06/18/cluster/</id>
     <published>2014-06-17T16:00:00.000Z</published>
     <updated>2014-11-22T12:58:00.000Z</updated>
     <content type="html"><![CDATA[<p>今天下午听了于剑老师关于聚类的讲座，下面简单总结下。</p>
@@ -146,18 +146,18 @@ s.t. ]]>
 <p>物以类聚，人以群分。这句话比喻同类的东西常聚在一起，志同道合的人相聚成群。关于这个成语还有一个有趣的典故，有兴趣的可以看看<a href="http://]]>
     </summary>
     
-      <category term="clustering" scheme="http://lingdian618.github.io/tags/clustering/"/>
+      <category term="clustering" scheme="http://lijian.ml/tags/clustering/"/>
     
-      <category term="summary" scheme="http://lingdian618.github.io/tags/summary/"/>
+      <category term="summary" scheme="http://lijian.ml/tags/summary/"/>
     
-      <category term="学习笔记" scheme="http://lingdian618.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="http://lijian.ml/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[近期总结]]></title>
-    <link href="http://lingdian618.github.io/2014/06/16/summary/"/>
-    <id>http://lingdian618.github.io/2014/06/16/summary/</id>
+    <link href="http://lijian.ml/2014/06/16/summary/"/>
+    <id>http://lijian.ml/2014/06/16/summary/</id>
     <published>2014-06-15T16:00:00.000Z</published>
     <updated>2014-11-07T03:32:49.000Z</updated>
     <content type="html"><![CDATA[<p>话说自去年入学以来，印象中北京没下过几次雨，但这两天的暴雨提醒了我“北京看海”不是神话。经过昨晚一夜大雨，校园中那条小河水位暴涨，由于小河刚挖成不久，被暴雨这么一冲，“枯水渠”一夜之间变成了“小黄河”。窗外的青蛙在大雨过后也变得异常兴奋，呱呱叫个不停。此刻的我，正坐在宿舍，听着蛙声，准备总结下过去几周的生活。</p>
@@ -168,16 +168,16 @@ s.t. ]]>
     <![CDATA[<p>话说自去年入学以来，印象中北京没下过几次雨，但这两天的暴雨提醒了我“北京看海”不是神话。经过昨晚一夜大雨，校园中那条小河水位暴涨，由于小河刚挖成不久，被暴雨这么一冲，“枯水渠”一夜之间变成了“小黄河”。窗外的青蛙在大雨过后也变得异常兴奋，呱呱叫个不停。此刻的我，正坐在宿舍，]]>
     </summary>
     
-      <category term="summary" scheme="http://lingdian618.github.io/tags/summary/"/>
+      <category term="summary" scheme="http://lijian.ml/tags/summary/"/>
     
-      <category term="生活点滴" scheme="http://lingdian618.github.io/categories/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/"/>
+      <category term="生活点滴" scheme="http://lijian.ml/categories/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[一个有意思的概率问题]]></title>
-    <link href="http://lingdian618.github.io/2014/01/15/an_probability_problem/"/>
-    <id>http://lingdian618.github.io/2014/01/15/an_probability_problem/</id>
+    <link href="http://lijian.ml/2014/01/15/an_probability_problem/"/>
+    <id>http://lijian.ml/2014/01/15/an_probability_problem/</id>
     <published>2014-01-14T16:00:00.000Z</published>
     <updated>2014-11-05T13:59:21.000Z</updated>
     <content type="html"><![CDATA[<h2 id="引入问题">引入问题</h2>
@@ -210,18 +210,18 @@ s.t. ]]>
 <p>在书上看到一个有意思的问题，不知从何说起，举个栗子，话说临近期末，小明闲来无事，想起了炒股，但他对股市知之甚少，于是他打算请个专家来指导他，为了确保专家质量，他决定对50个“专家”进行考核，选取表现最好的，考核方式如下：让专家]]>
     </summary>
     
-      <category term="probability" scheme="http://lingdian618.github.io/tags/probability/"/>
+      <category term="probability" scheme="http://lijian.ml/tags/probability/"/>
     
-      <category term="math" scheme="http://lingdian618.github.io/tags/math/"/>
+      <category term="math" scheme="http://lijian.ml/tags/math/"/>
     
-      <category term="学习笔记" scheme="http://lingdian618.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="http://lijian.ml/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[往者不可谏，来者犹可追]]></title>
-    <link href="http://lingdian618.github.io/2014/01/01/summary2013/"/>
-    <id>http://lingdian618.github.io/2014/01/01/summary2013/</id>
+    <link href="http://lijian.ml/2014/01/01/summary2013/"/>
+    <id>http://lijian.ml/2014/01/01/summary2013/</id>
     <published>2013-12-31T16:00:00.000Z</published>
     <updated>2014-11-07T03:32:57.000Z</updated>
     <content type="html"><![CDATA[<p>感冒了，看了一上午电影，睡了一下午，眼看2014年的第一天就要这样宅过去了，但似乎又没有更好的安排，好吧，宅就宅吧，但好歹做点比睡觉更有意义的事情吧，于是写点东西吧。</p>
@@ -235,16 +235,16 @@ s.t. ]]>
 <p>回首过去的一年，值得记录的各种大事、小事也不多，对我来说称得上大事的可能就是考研、毕业、研究]]>
     </summary>
     
-      <category term="summary" scheme="http://lingdian618.github.io/tags/summary/"/>
+      <category term="summary" scheme="http://lijian.ml/tags/summary/"/>
     
-      <category term="生活点滴" scheme="http://lingdian618.github.io/categories/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/"/>
+      <category term="生活点滴" scheme="http://lijian.ml/categories/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系]]></title>
-    <link href="http://lingdian618.github.io/2013/11/03/DCT/"/>
-    <id>http://lingdian618.github.io/2013/11/03/DCT/</id>
+    <link href="http://lijian.ml/2013/11/03/DCT/"/>
+    <id>http://lijian.ml/2013/11/03/DCT/</id>
     <published>2013-11-02T16:00:00.000Z</published>
     <updated>2014-10-31T14:37:50.000Z</updated>
     <content type="html"><![CDATA[<h2 id="理解DCT与DFT之间关系的关键几点">理解DCT与DFT之间关系的关键几点</h2>
@@ -268,18 +268,18 @@ s.t. ]]>
 <li>偶延拓]]>
     </summary>
     
-      <category term="DCT" scheme="http://lingdian618.github.io/tags/DCT/"/>
+      <category term="DCT" scheme="http://lijian.ml/tags/DCT/"/>
     
-      <category term="DFT" scheme="http://lingdian618.github.io/tags/DFT/"/>
+      <category term="DFT" scheme="http://lijian.ml/tags/DFT/"/>
     
-      <category term="学习笔记" scheme="http://lingdian618.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="http://lijian.ml/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[多项式乘法与离散傅里叶变换（DFT）的关系]]></title>
-    <link href="http://lingdian618.github.io/2013/10/21/polyDFT/"/>
-    <id>http://lingdian618.github.io/2013/10/21/polyDFT/</id>
+    <link href="http://lijian.ml/2013/10/21/polyDFT/"/>
+    <id>http://lijian.ml/2013/10/21/polyDFT/</id>
     <published>2013-10-20T16:00:00.000Z</published>
     <updated>2014-11-22T12:32:28.000Z</updated>
     <content type="html"><![CDATA[<p>离散傅里叶变换是数字信号处理中的重要内容，然而但从公式出发很难获得比较直观的理解。在工程上，我们一般将其理解为，一个长度有限的数字信号可以分解为有限个离散三角函数信号，这样一来DFT的物理意义和相关性质就比较清晰，对DFT的一些性质我们无需从公式出发进行数学推导，可以根据物理意义来理解。比如数字信号在时域的平移可以看成是有限个三角函数信号的平移，而三角函数信号的平移其时就是相位变化，对应的就是是频域的相移。其他一些时域的伸缩变换与频域的伸缩变换也是类似的。但是对于卷积与乘积的关系，确实不好理解（可以看成是数字系统的响应，但还是有点抽象）。今天看完算法导论多项式相关内容，感觉对DFT有了更深的理解，特别是卷积与乘积的关系。</p>
@@ -295,18 +295,18 @@ s.t. ]]>
     <![CDATA[<p>离散傅里叶变换是数字信号处理中的重要内容，然而但从公式出发很难获得比较直观的理解。在工程上，我们一般将其理解为，一个长度有限的数字信号可以分解为有限个离散三角函数信号，这样一来DFT的物理意义和相关性质就比较清晰，对DFT的一些性质我们无需从公式出发进行数学推导，可以根据物]]>
     </summary>
     
-      <category term="DIP" scheme="http://lingdian618.github.io/tags/DIP/"/>
+      <category term="DIP" scheme="http://lijian.ml/tags/DIP/"/>
     
-      <category term="DFT" scheme="http://lingdian618.github.io/tags/DFT/"/>
+      <category term="DFT" scheme="http://lijian.ml/tags/DFT/"/>
     
-      <category term="学习笔记" scheme="http://lingdian618.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="http://lijian.ml/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[对相关性的理解]]></title>
-    <link href="http://lingdian618.github.io/2013/10/14/correlation/"/>
-    <id>http://lingdian618.github.io/2013/10/14/correlation/</id>
+    <link href="http://lijian.ml/2013/10/14/correlation/"/>
+    <id>http://lijian.ml/2013/10/14/correlation/</id>
     <published>2013-10-13T16:00:00.000Z</published>
     <updated>2014-11-05T12:47:34.000Z</updated>
     <content type="html"><![CDATA[<h2 id="何为相关性">何为相关性</h2>
@@ -327,13 +327,13 @@ s.t. ]]>
 <p>“相关性”这个词，在数据分析中很常见，数据之间的相关性对应的是事物之间的联系。比如说，人群身高数据和体重数据之间的相关性反映的是身高与体重之间的联系。说到相关性，就不得不提到因果关系，事物之间的因果关系是一种特殊的联系，而]]>
     </summary>
     
-      <category term="similarity" scheme="http://lingdian618.github.io/tags/similarity/"/>
+      <category term="similarity" scheme="http://lijian.ml/tags/similarity/"/>
     
-      <category term="correlation" scheme="http://lingdian618.github.io/tags/correlation/"/>
+      <category term="correlation" scheme="http://lijian.ml/tags/correlation/"/>
     
-      <category term="math" scheme="http://lingdian618.github.io/tags/math/"/>
+      <category term="math" scheme="http://lijian.ml/tags/math/"/>
     
-      <category term="学习笔记" scheme="http://lingdian618.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="http://lijian.ml/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
