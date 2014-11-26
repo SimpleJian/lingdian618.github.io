@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>给博客添加Gallery页面 | Lijian&#39;s Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引言
+博客弄好后，试用了很多主题，一开始感觉都还不错，比如之前用的Pacman就非常好，后来要在博客中发布照片时，就感觉有些地方不太合我口味。最初在发布照片时，我把同一主题的照片发布到同一篇博客，这样下来大概有10篇左右的照片博客，弄完之后发现把照片博客混在一般的文章中很不爽，一方面找起来不方便，另一方面首页看起来挺混乱的，于是就想着专门弄一个Gallery页面来放照片博客，试用了很多主题后都没找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给博客添加Gallery页面">
+<meta property="og:url" content="http://lijian.ml/2014/11/26/给博客添加Gallery页面/">
+<meta property="og:site_name" content="Lijian's Site">
+<meta property="og:description" content="引言
+博客弄好后，试用了很多主题，一开始感觉都还不错，比如之前用的Pacman就非常好，后来要在博客中发布照片时，就感觉有些地方不太合我口味。最初在发布照片时，我把同一主题的照片发布到同一篇博客，这样下来大概有10篇左右的照片博客，弄完之后发现把照片博客混在一般的文章中很不爽，一方面找起来不方便，另一方面首页看起来挺混乱的，于是就想着专门弄一个Gallery页面来放照片博客，试用了很多主题后都没找">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="给博客添加Gallery页面">
+<meta name="twitter:description" content="引言
+博客弄好后，试用了很多主题，一开始感觉都还不错，比如之前用的Pacman就非常好，后来要在博客中发布照片时，就感觉有些地方不太合我口味。最初在发布照片时，我把同一主题的照片发布到同一篇博客，这样下来大概有10篇左右的照片博客，弄完之后发现把照片博客混在一般的文章中很不爽，一方面找起来不方便，另一方面首页看起来挺混乱的，于是就想着专门弄一个Gallery页面来放照片博客，试用了很多主题后都没找">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Lijian&#39;s Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/little.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lijian&#39;s Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Everything is possible if you have the real passion to what you do</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/gallery">Gallery</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://lijian.ml"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      
+      <div class="outer">
+        <section id="main"><article id="post-给博客添加Gallery页面" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <!-- 文章日期 -->
+    <a href="/2014/11/26/给博客添加Gallery页面/" class="article-date">
+  <time datetime="2014-11-26T00:50:58.000Z" itemprop="datePublished">Nov 26 2014</time>
+</a>
+    <!-- 文章类别 -->
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    <!-- 文章开头的fancybox照片 -->
+    
+    
+      <header class="article-header">
+        <!-- 文章标题 -->
+        
+  
+    <h1 class="article-title" itemprop="name">
+      给博客添加Gallery页面
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
+      
+        <h1 id="引言">引言</h1>
+<p>博客弄好后，试用了很多<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">主题</a>，一开始感觉都还不错，比如之前用的<a href="http://yangjian.me/pacman/hello/introducing-pacman-theme/" target="_blank" rel="external">Pacman</a>就非常好，后来要在博客中发布照片时，就感觉有些地方不太合我口味。最初在发布照片时，我把同一主题的照片发布到同一篇博客，这样下来大概有10篇左右的照片博客，弄完之后发现把照片博客混在一般的文章中很不爽，一方面找起来不方便，另一方面首页看起来挺混乱的，于是就想着专门弄一个Gallery页面来放照片博客，试用了很多主题后都没找到解决方案，为此我还在hexo的github页面提了<a href="https://github.com/hexojs/hexo/issues/912#comments" target="_blank" rel="external">issues</a>，<a href="https://github.com/xing5" target="_blank" rel="external">xing5</a>给出了一种方案：把每篇照片博客都打上一个特殊的tag，然后在设置中把Gallery的链接设置为该tag的目录。这种方案确实可以简单有效地建立Gallery页面，但是首页和Archive页面还是会显示照片博客，所以我最终没采用此方案。后来纠结了很久也没找到比较合适的方案，就在我要妥协的时候，About页面给了我思路：Gallery页面其实也可以看成是About页面，只不过是About My Pictures，可以把所有的照片放在同一个页面中，同一个主题的照片可以分段隔开，放在同一个fancybox中，最终效果看<a href="http://lijian.ml/gallery/" target="_blank" rel="external">=&gt;这里&lt;=</a>。但由于要发布的照片有100+张，手工写图片链接想想都可怕，好在会点批处理，可以用bash快速生成Gallery页面的index.md文件。整个流程如下。</p>
+<h2 id="生成新页面">生成新页面</h2>
+<p>在博客目录下执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page <span class="string">'Gallery'</span></div></pre></td></tr></table></figure>
+
+<h2 id="使用批处理生成Gallery页面的index文件">使用批处理生成Gallery页面的index文件</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="shebang">#! /bin/bash</span></div><div class="line"></div><div class="line"><span class="comment"># 要发布的照片目录，目录中的每个子目录为同一个主题的照片，放在同一个fancybox中</span></div><div class="line">PHO_HOME=~/Pictures/public_photos/</div><div class="line"><span class="comment"># Gallery页面index文件</span></div><div class="line">dst_file=~/Documents/github/hexo/<span class="built_in">source</span>/gallery/index.md</div><div class="line"></div><div class="line"><span class="comment"># 七牛缩略图样式： 宽度618px </span></div><div class="line">style_small=<span class="string">'imageView2/2/w/618/q/100|watermark/2/text/bGlqaWFuLm1s/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10'</span></div><div class="line"><span class="comment"># 七牛缩略图样式： 高度500px</span></div><div class="line">style_h500=<span class="string">'imageView2/2/h/500/q/85|watermark/2/text/bGlqaWFuLm1s/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10'</span></div><div class="line"></div><div class="line"><span class="comment"># 七牛云中照片的前缀</span></div><div class="line">prefix=<span class="string">'http://public-lingdian618.qiniudn.com/images'</span></div><div class="line"></div><div class="line"><span class="comment"># 格式化输出头文件</span></div><div class="line"><span class="built_in">printf</span> <span class="string">"layout: gallery\ntitle: Gallery\ndate: 2014-11-23 09:08:08\n---\n\n"</span> &gt; <span class="variable">$dst_file</span></div><div class="line"></div><div class="line"><span class="comment"># 按最后touch时间遍历子目录</span></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> ` ls <span class="variable">$PHO_HOME</span> -t `;</div><div class="line"><span class="keyword">do</span></div><div class="line">	<span class="keyword">if</span> [ <span class="operator">-d</span> <span class="variable">$PHO_HOME</span>/<span class="variable">$x</span> ];</div><div class="line">	<span class="keyword">then</span></div><div class="line">		<span class="built_in">printf</span> <span class="string">"\n\n## %s\n\n"</span> <span class="variable">$x</span> &gt;&gt; <span class="variable">$dst_file</span></div><div class="line">		<span class="built_in">cd</span> <span class="variable">$PHO_HOME</span>/<span class="variable">$x</span></div><div class="line">		` ls | cat | xargs -I <span class="string">'{}'</span> <span class="built_in">printf</span> <span class="string">"&lt;a class=\"article-gallery-img fancybox\" href=\"%s/%s/%s?%s\" &gt;&lt;img src=\"%s/%s/%s?%s\" itemprop=\"image\"&gt;&lt;/a&gt;"</span> <span class="variable">$prefix</span> <span class="variable">$x</span> <span class="string">'{}'</span> <span class="variable">$style_small</span> <span class="variable">$prefix</span> <span class="variable">$x</span> <span class="string">'{}'</span> <span class="variable">$style_h500</span> &gt;&gt; <span class="variable">$dst_file</span> `</div><div class="line">	<span class="keyword">fi</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+
+<h2 id="去掉Gallery页面的Sidebar">去掉Gallery页面的Sidebar</h2>
+<p>我的修改是基于默认主题landscape，通过 hexo new page产生的页面最终都会有Sidebar，看起来不爽，如果想去掉，可以通过修改landscape的layout.ejs文件实现。</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if(page.layout == 'about' || page.layout == 'gallery'){</div><div class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"outer"</span>&gt;</span><span class="tag">&lt;<span class="title">section</span>&gt;</span></div><div class="line">    	<span class="vbscript">&lt;%- body%&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="title">section</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">}else...</div></pre></td></tr></table></figure><br>思路是这样的：对于不想要Sidebar的页面，在index.md文件中设定特殊的layout，例如我的Gallery页面index.md头文件如下：</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">layout: gallery</div><div class="line">title: Gallery</div><div class="line">date: <span class="number">2014</span>-<span class="number">11</span>-<span class="number">23</span> <span class="number">09</span>:<span class="number">08</span>:<span class="number">08</span></div><div class="line">---</div></pre></td></tr></table></figure><br>然后在layout.ejs文件中根据page.layout来控制是否加载Sidebar模块。</p>
+<h1 id="小结">小结</h1>
+<p>通过这种方法添加Gallery页面简单粗暴，虽然有点麻烦，但在找到更好的方法之前只能这样了。这篇博客就当抛砖引玉，期待哪位仁兄能提出更好的解决方案。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+    <!--  <a data-url="http://lijian.ml/2014/11/26/给博客添加Gallery页面/" data-id="utw2utfw0uwse4zx" class="article-share-link">Share</a>  -->
+      <!-- 文章的评论功能打开并且配置了disqus-->
+      
+      <!-- 显示文章标签 -->
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2014/11/21/手机照片整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">手机照片整理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-给博客添加Gallery页面" data-title="给博客添加Gallery页面" data-url="http://lijian.ml/2014/11/26/给博客添加Gallery页面/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'lingdian618'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DCT/">DCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFT/">DFT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIP/">DIP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KKT/">KKT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clustering/">clustering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/correlation/">correlation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/">optimization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/probability/">probability</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qiniu/">qiniu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/similarity/">similarity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/summary/">summary</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/11/26/给博客添加Gallery页面/">给博客添加Gallery页面</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/21/手机照片整理/">手机照片整理</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/05/kkt/">对KKT条件的理解</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/18/cluster/">聚类中的关键问题--于剑老师讲座报告</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/16/summary/">近期总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      
+      <!-- 页脚，powered by …… -->
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 Lijian<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <!-- 移动端？ -->
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/gallery" class="mobile-nav-link">Gallery</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    <!-- 评论框，js包含 -->
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>
