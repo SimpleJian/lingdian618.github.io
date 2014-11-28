@@ -103,11 +103,9 @@
       <div class="outer">
         <section id="main"><article id="post-给博客添加Gallery页面" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <!-- 文章日期 -->
     <a href="/2014/11/26/给博客添加Gallery页面/" class="article-date">
   <time datetime="2014-11-26T00:50:58.000Z" itemprop="datePublished">Nov 26 2014</time>
 </a>
-    <!-- 文章类别 -->
     
   <div class="article-category">
     <a class="article-category-link" href="/categories/其他/">其他</a>
@@ -115,11 +113,9 @@
 
   </div>
   <div class="article-inner">
-    <!-- 文章开头的fancybox照片 -->
     
     
       <header class="article-header">
-        <!-- 文章标题 -->
         
   
     <h1 class="article-title" itemprop="name">
@@ -130,7 +126,6 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
         <h1 id="引言">引言</h1>
 <p>博客迁到Hexo后，试用了很多<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">主题</a>，一开始感觉都还不错，比如之前用的<a href="http://yangjian.me/pacman/hello/introducing-pacman-theme/" target="_blank" rel="external">Pacman</a>就非常好，后来要在博客中发布照片时，就感觉有些地方不太合我口味。最初在发布照片时，我把同一主题的照片发布到同一篇博客，这样下来大概有10篇左右的照片博客，弄完之后发现把照片博客混在一般的文章中很不爽，一方面找起来不方便，另一方面首页看起来挺混乱的，于是就想着专门弄一个Gallery页面来放照片博客，试用了很多主题后都没找到解决方案，为此我还在hexo的github页面提了<a href="https://github.com/hexojs/hexo/issues/912#comments" target="_blank" rel="external">issues</a>，然后<a href="https://github.com/xing5" target="_blank" rel="external">xing5</a>给出了一种方案：把每篇照片博客都打上一个特殊的tag，然后在设置中把Gallery的链接设置为该tag的目录。这种方案确实可以简单有效地建立Gallery页面，但是首页和Archive页面还是会显示照片博客，所以我最终没采用此方案。后来纠结了很久也没找到比较合适的方案，就在我要妥协的时候，About页面给了我思路：Gallery页面其实也可以看成是About页面，只不过是About My Pictures，可以把所有的照片放在同一个页面中，同一个主题的照片可以分段隔开，放在同一个fancybox中，最终效果看<a href="http://lijian.ml/gallery/" target="_blank" rel="external">=&gt;这里&lt;=</a>。但由于要发布的照片有100+张，手工写图片链接想想都可怕，好在会点批处理，可以用bash快速生成Gallery页面的index.md文件。整个流程如下。</p>
@@ -151,16 +146,13 @@
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lijian.ml/2014/11/26/给博客添加Gallery页面/" data-id="31ywiw8f9oz0n8ed" class="article-share-link">Share</a>  -->
-      <!-- 文章的评论功能打开并且配置了disqus-->
+    <!--  <a data-url="http://lijian.ml/2014/11/26/给博客添加Gallery页面/" data-id="2597w27pqytp25jv" class="article-share-link">Share</a>  -->
       
-      <!-- 显示文章标签 -->
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
 
     </footer>
   </div>
-  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
   
     
 <nav id="article-nav">
@@ -178,10 +170,7 @@
 
 
   <section id="comments">
-    <!-- 多说评论框 start -->
     <div class="ds-thread" data-thread-key="post-给博客添加Gallery页面" data-title="给博客添加Gallery页面" data-url="http://lijian.ml/2014/11/26/给博客添加Gallery页面/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
     var duoshuoQuery = {short_name:'lingdian618'};
       (function() {
@@ -193,7 +182,6 @@
          || document.getElementsByTagName('body')[0]).appendChild(ds);
       })();
       </script>
-    <!-- 多说公共JS代码 end -->
   </section>
   </section>
         
@@ -261,7 +249,6 @@
         
       </div>
       
-      <!-- 页脚，powered by …… -->
       <footer id="footer">
   
   <div class="outer">
@@ -272,7 +259,6 @@
   </div>
 </footer>
     </div>
-    <!-- 移动端？ -->
     <nav id="mobile-nav">
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
@@ -282,7 +268,6 @@
     <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
-    <!-- 评论框，js包含 -->
     
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

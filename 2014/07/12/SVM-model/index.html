@@ -115,11 +115,9 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
       <div class="outer">
         <section id="main"><article id="post-SVM-model" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <!-- 文章日期 -->
     <a href="/2014/07/12/SVM-model/" class="article-date">
   <time datetime="2014-07-11T16:00:00.000Z" itemprop="datePublished">Jul 12 2014</time>
 </a>
-    <!-- 文章类别 -->
     
   <div class="article-category">
     <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
@@ -127,11 +125,9 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
 
   </div>
   <div class="article-inner">
-    <!-- 文章开头的fancybox照片 -->
     
     
       <header class="article-header">
-        <!-- 文章标题 -->
         
   
     <h1 class="article-title" itemprop="name">
@@ -142,7 +138,6 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-      <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
         <h2 id="最优间隔分类器">最优间隔分类器</h2>
 <p>针对模式分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：</p>
@@ -194,23 +189,20 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
 \end{align}$$</span><br>可得<span>$\vec w = \sum_{i} \alpha_i y_i {\vec x}_i$</span>，代入对偶问题中可得：</p>
 <p><span>$$\begin{align}
 & \mathop{max}_{\vec \alpha} \{ \mathop{min}_{\vec w, b} L(\vec w, b, \vec \alpha) \} 
-= \mathop{max}_{\vec \alpha} \{ \sum_{i} \alpha_i - \sum_{i,j} \alpha_i \alpha_j y_i y_j {\vec x}_i {\vec x}_j \} 
+= \mathop{max}_{\vec \alpha} \{ \sum_{i} \alpha_i - \sum_{i,j} \alpha_i \alpha_j y_i y_j {\vec x}_i {\vec x}_j \} \\
 & s.t. \quad \sum_{i} \alpha_i y_i = 0 
-\end{align}$$</span><br>转化成上述形式后可通过SMO算法快速求得最优解。</p>
+\end{align}$$</span><br>转化成上述形式后可通过SMO算法快速求得最优解。关于SMO算法，打算单独写一篇。</p>
 
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lijian.ml/2014/07/12/SVM-model/" data-id="ffyn6vqzigxxwdqu" class="article-share-link">Share</a>  -->
-      <!-- 文章的评论功能打开并且配置了disqus-->
+    <!--  <a data-url="http://lijian.ml/2014/07/12/SVM-model/" data-id="ib9appv94v0bfym9" class="article-share-link">Share</a>  -->
       
-      <!-- 显示文章标签 -->
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVM/">SVM</a></li></ul>
 
     </footer>
   </div>
-  <!-- 如果不是索引页就显示导航：上一页，下一页 -->
   
     
 <nav id="article-nav">
@@ -237,10 +229,7 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
 
 
   <section id="comments">
-    <!-- 多说评论框 start -->
     <div class="ds-thread" data-thread-key="post-SVM-model" data-title="SVM数学推导" data-url="http://lijian.ml/2014/07/12/SVM-model/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
     var duoshuoQuery = {short_name:'lingdian618'};
       (function() {
@@ -252,7 +241,6 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
          || document.getElementsByTagName('body')[0]).appendChild(ds);
       })();
       </script>
-    <!-- 多说公共JS代码 end -->
   </section>
   </section>
         
@@ -320,7 +308,6 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
         
       </div>
       
-      <!-- 页脚，powered by …… -->
       <footer id="footer">
   
   <div class="outer">
@@ -331,7 +318,6 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
   </div>
 </footer>
     </div>
-    <!-- 移动端？ -->
     <nav id="mobile-nav">
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
@@ -341,7 +327,6 @@ $$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
     <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
-    <!-- 评论框，js包含 -->
     
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
