@@ -3,20 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>往者不可谏，来者犹可追 | Lijian&#39;s Site</title>
+  <title>SVM数学推导 | Lijian&#39;s Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="感冒了，看了一上午电影，睡了一下午，眼看2014年的第一天就要这样宅过去了，但似乎又没有更好的安排，好吧，宅就宅吧，但好歹做点比睡觉更有意义的事情吧，于是写点东西吧。
-回首过去的一年，值得记录的各种大事、小事也不多，对我来说称得上大事的可能就是考研、毕业、研究生入学吧。关于考研，印象最深的莫过于选择考中科院的勇气以及准备初试的那段时光了，我的勇气说出来可能有点可笑，“给自己一个创造奇迹的机会”，想">
+  <meta name="description" content="最优间隔分类器
+针对模式分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：
+$$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
+
+其中，${\vec x}_i$表示第i个样本的特征向量，$y_i$ 表示第i个样本所属类别。
+对于二分类问题，设线性分类器的判别函数为 $d({\vec x})={\vec w} \cdot {\vec x}+b$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="往者不可谏，来者犹可追">
-<meta property="og:url" content="http://lijian.ml/2014/01/01/summary2013/">
+<meta property="og:title" content="SVM数学推导">
+<meta property="og:url" content="http://lijian.ml/2014/07/12/SVM-model/">
 <meta property="og:site_name" content="Lijian's Site">
-<meta property="og:description" content="感冒了，看了一上午电影，睡了一下午，眼看2014年的第一天就要这样宅过去了，但似乎又没有更好的安排，好吧，宅就宅吧，但好歹做点比睡觉更有意义的事情吧，于是写点东西吧。
-回首过去的一年，值得记录的各种大事、小事也不多，对我来说称得上大事的可能就是考研、毕业、研究生入学吧。关于考研，印象最深的莫过于选择考中科院的勇气以及准备初试的那段时光了，我的勇气说出来可能有点可笑，“给自己一个创造奇迹的机会”，想">
+<meta property="og:description" content="最优间隔分类器
+针对模式分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：
+$$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
+
+其中，${\vec x}_i$表示第i个样本的特征向量，$y_i$ 表示第i个样本所属类别。
+对于二分类问题，设线性分类器的判别函数为 $d({\vec x})={\vec w} \cdot {\vec x}+b$">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="往者不可谏，来者犹可追">
-<meta name="twitter:description" content="感冒了，看了一上午电影，睡了一下午，眼看2014年的第一天就要这样宅过去了，但似乎又没有更好的安排，好吧，宅就宅吧，但好歹做点比睡觉更有意义的事情吧，于是写点东西吧。
-回首过去的一年，值得记录的各种大事、小事也不多，对我来说称得上大事的可能就是考研、毕业、研究生入学吧。关于考研，印象最深的莫过于选择考中科院的勇气以及准备初试的那段时光了，我的勇气说出来可能有点可笑，“给自己一个创造奇迹的机会”，想">
+<meta name="twitter:title" content="SVM数学推导">
+<meta name="twitter:description" content="最优间隔分类器
+针对模式分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：
+$$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$
+
+其中，${\vec x}_i$表示第i个样本的特征向量，$y_i$ 表示第i个样本所属类别。
+对于二分类问题，设线性分类器的判别函数为 $d({\vec x})={\vec w} \cdot {\vec x}+b$">
 
   
     <link rel="alternative" href="/atom.xml" title="Lijian&#39;s Site" type="application/atom+xml">
@@ -101,16 +113,16 @@
 </header>
       
       <div class="outer">
-        <section id="main"><article id="post-summary2013" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SVM-model" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <!-- 文章日期 -->
-    <a href="/2014/01/01/summary2013/" class="article-date">
-  <time datetime="2013-12-31T16:00:00.000Z" itemprop="datePublished">Jan 1 2014</time>
+    <a href="/2014/07/12/SVM-model/" class="article-date">
+  <time datetime="2014-07-11T16:00:00.000Z" itemprop="datePublished">Jul 12 2014</time>
 </a>
     <!-- 文章类别 -->
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/生活点滴/">生活点滴</a>
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
   </div>
 
   </div>
@@ -123,7 +135,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      往者不可谏，来者犹可追
+      SVM数学推导
     </h1>
   
 
@@ -132,21 +144,69 @@
     <div class="article-entry" itemprop="articleBody">
       <!-- 有摘要并且是索引页面（首页，归档页面，分类页面，标签页面）就显示摘要 -->
       
-        <p>感冒了，看了一上午电影，睡了一下午，眼看2014年的第一天就要这样宅过去了，但似乎又没有更好的安排，好吧，宅就宅吧，但好歹做点比睡觉更有意义的事情吧，于是写点东西吧。</p>
-<p>回首过去的一年，值得记录的各种大事、小事也不多，对我来说称得上大事的可能就是考研、毕业、研究生入学吧。关于考研，印象最深的莫过于选择考中科院的勇气以及准备初试的那段时光了，我的勇气说出来可能有点可笑，“给自己一个创造奇迹的机会”，想起这些，至今仍能感动自我。至于毕业，印象最深的就是拍毕业照和吃散伙饭，遗憾的是没有毕业旅行，写到这里，脑海里隐约浮现出各种无节操的毕业照以及散伙饭时班里几个女生哭成一团的场景。关于研究生入学，其重要性不言而喻，开启了学习生涯新篇章，但由于第一学期集中授课，所以给我的感觉好像是在上大五。其余的各种小事，就重点记录各种人生第一次吧：首先是来北京复试，那次经历创造了多项记录，第一次来北京、第一次坐10+小时的火车、第一次坐卧铺、第一次坐地铁、第一次一个人住宾馆、第一次一个人离家这么远、第一次真正的面试……，这些经历对一些人来说可能微不足道，但对我这样一个大学期间回家不用坐火车的人来说还是值得记录的。然后就是研究生入学以来产生的第一次，比如第一次坐长达6小时的高铁、第一次吃咸的豆腐脑、第一次住单人宿舍、第一次领工资、第一次去长城、第一次坐缆车、第一次滑雪、第一次享用暖气、还有第一次苦逼的抢票……，当时可能没注意，现在回想起来居然有这么多第一次，突然感觉2013没白活。</p>
-<p>过去回首完了，该展望未来了。</p>
-<p>提到新年计划，说实在的还真没想好，我一向信奉“车到山前必有路，桥到船头自然直”和“人生从来就不是规划出来的，而是一步步走出来的”之类的话，所以一直懒于计划，虽说如此，但还是得有一个大体的方向，方向对了，就不会错得太离谱。下面就列举一些所谓的目标吧：首先，要多读书，这个听起来就不那么靠谱，说实话，之前还真没养成读书这个习惯，都是心血来潮读一读，所以不好给个具体的量化指标，只是希望能养成读书的习惯。其次，学会思考，学会表达，我一直坚信学到的东西只有经过思考才能有更深刻的理解，只有表达出来才能成为自己的东西。然后，要处理好学与思的关系，借用孔子的话来说，“学而不思则罔，思而不学则殆”，我的理解是，学习新知识时要多思考，否则会对学到的东西感到迷惘；遇到问题时不要光思考，可能还要与他人沟通，学习一些解决问题的知识和方法，否则就可能陷于闭门造车的困境。最后，要时刻保持激情，对学习的激情，对生活的激情，只有这样才能保持前行的动力。缺乏激情时不妨想想最可怕的事情吧（比你优秀的人比你更努力）。</p>
-<p>最后，我想说的是：2013，去你；2014，走你！</p>
+        <h2 id="最优间隔分类器">最优间隔分类器</h2>
+<p>针对模式分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：</p>
+<span>$$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$</span>
+
+<p>其中，<span>${\vec x}_i$</span>表示第i个样本的特征向量，<span>$y_i$</span> 表示第i个样本所属类别。</p>
+<p>对于二分类问题，设线性分类器的判别函数为 <span>$d({\vec x})={\vec w} \cdot {\vec x}+b$</span> ，对于一个待分类样本，通过特征提取得到其特征向量，将特征向量代入分类器判别函数，若输出为正，则将样本判定为+1类，否则为-1类。从几何的观点来看，特征提取是将样本抽象为欧氏空间中的一个点，而判别函数是该空间中的一个超平面，超平面不同侧的点对应不同类别的样本。因此，如果样本线性可分的话，那么就存在无穷多个超平面将其分开，也即存在无穷多个线性分类器能将样本分开，既然是这样，那么哪一个最好呢？直观上看，应该使分类超平面离样本点越远越好，这样可以减小把新样本分错的概率。当然，此处的“越远越好”的前提是要正确分类。分类器的间隔定义为所有样本点到分类超平面的距离中的最小值。最优间隔分类器就是间隔最大的分类器。</p>
+<p>样本点<span>${\vec x}_i$</span>到超平面的距离为：</p>
+<span>$$\frac{|\vec w \cdot {\vec x}_i + b|}{\Vert \vec w \Vert}$$</span>
+
+<p>最优间隔分类器的优化目标为：</p>
+<span>$$\mathop{max}_{\vec w, b} \{ \mathop{min}_i \{ \frac{|\vec w \cdot {\vec x}_i + b|}{\Vert \vec w \Vert} \} \}$$</span>
+
+<p>要直接求解上述优化问题显然不易，然而，幸运的是可以将其转化为一个凸优化问题。</p>
+<h2 id="转化为带约束的凸优化问题">转化为带约束的凸优化问题</h2>
+<p>上一节将最优间隔分类器的求解转化为一个数学优化问题，我们最终的目标是求得<span>$\vec w$</span>和<span>$b$</span>，如果<span>$\vec w^*$</span>和<span>$b^*$</span>是最优间隔分类器的参数，那么<span>$k\cdot {\vec w}^*$</span>和<span>$k\cdot b^*$</span>其实对应同一个分类器(超平面)。由此可以得出，在问题可分的情况下，一定存在<span>$\vec w$</span>和<span>$b$</span>满足<span>$|\vec w \cdot {\vec x}_i + b| \geq 1$</span>，同时又是最优间隔分类器的参数。因此可以考虑把这个约束加到上一节的优化问题中，关键在于，加入此约束后，求得的最优解与原问题等价，同时可以将原问题简化。下面看看如何简化：</p>
+<span>$$\begin{eqnarray}
+&& \mathop{max}_{\vec w, b} \{ \mathop{min}_i \{ \frac{|\vec w \cdot {\vec x}_i + b|}{\Vert \vec w \Vert} \} \} , & s.t. \quad  |\vec w \cdot {\vec x}_i + b| \geq 1 \\
+& \Leftrightarrow 
+& \mathop{max}_{\vec w, b} \{ \frac{1}{\Vert \vec w \Vert} \} , & s.t. \quad  |\vec w \cdot {\vec x}_i + b| \geq 1 \\
+& \Leftrightarrow 
+& \mathop{min}_{\vec w, b}  {\Vert \vec w \Vert} , & s.t. \quad  |\vec w \cdot {\vec x}_i + b| \geq 1 \\
+& \Leftrightarrow 
+& \mathop{min}_{\vec w, b}  \frac{1}{2}{\Vert \vec w \Vert}^2  , & s.t. \quad  |\vec w \cdot {\vec x}_i + b| \geq 1 \\
+& \Leftrightarrow 
+& \mathop{min}_{\vec w, b}  \frac{1}{2}{\Vert \vec w \Vert}^2  , & s.t. \quad  (\vec w \cdot {\vec x}_i + b)\cdot y_i \geq 1 
+\end{eqnarray}$$</span><br>最终，我们将上一节复杂的优化问题转化成了一个带约束的凸优化问题，但仍然不好求解，所以还得转化。<br><br>## 转化为对偶问题<br>为了得到对偶问题，先构造罚函数<span>$L(\vec w, b, \vec \alpha)$</span>，然后分析<span>$\mathop{max}_{\vec w, b} \{ \mathop{min}_{\vec \alpha} L(\vec w, b, \vec \alpha) \}$</span>与上一节的带约束凸优化问题等价，接着根据对偶原理将max min问题转化为min max问题：<span>$\mathop{min}_{\vec \alpha} \{ \mathop{max}_{\vec w, b} L(\vec w, b, \vec \alpha) \}$</span>。<br><br>### 罚函数的构造<br>罚函数的思想是把约束条件吸收到目标函数里面，通过增加目标函数的参数来减少约束条件，同时为了保证罚函数与原优化问题等价，往往需要引入新的约束，但新的约束条件通常较简单。在此引入的罚函数为：<br><span>$$\begin{align}
+& L(\vec w, b, \vec \alpha)=\frac{1}{2}{\Vert \vec w \Vert}^2 - \sum_{i} \alpha_i [(\vec w \cdot {\vec x}_i + b)\cdot y_i - 1 ] \\
+& s.t. \quad \alpha_i \geq 0 
+\end{align}$$</span>
+
+<h3 id="等价性分析">等价性分析</h3>
+<p>现在来分析<span>$\mathop{min}_{\vec w, b} \{ \mathop{max}_{\vec \alpha} L(\vec w, b, \vec \alpha) \}$</span>与上一节的带约束凸优化问题等价。为了便于分析min max函数的值，先把参数空间划分为2个子集合，不妨叫集合A和集合B，集合A中的参数满足<span>$(\vec w \cdot {\vec x}_i)\cdot y_i - 1 \geq 0$</span>，B为A的补集，然后进行如下推导：</p>
+<span>$$\begin{eqnarray}
+&& \mathop{min}_{\vec w, b} \{ \mathop{max}_{\vec \alpha \geq 0 } L(\vec w, b, \vec \alpha) \} \\
+&=& \mathop{min}_{\vec w, b} \{ \mathop{max}_{\vec \alpha \geq 0, (\vec w, b)\in A } L(\vec w, b, \vec \alpha), \mathop{max}_{\vec \alpha \geq 0 , (\vec w, b)\in B } L(\vec w, b, \vec \alpha) \}  \\
+&=& \mathop{min}_{\vec w, b} \{ { \frac{1}{2}{\Vert \vec w \Vert}^2 }_{ (\vec w, b)\in A }, { \frac{1}{2}{\Vert \vec w \Vert}^2 }_{ (\vec w, b)\in B } + \infty \}  \\
+&=& \mathop{min}_{\vec w, b}_{ (\vec w, b)\in A }  \frac{1}{2}{\Vert \vec w \Vert}^2  
+\end{eqnarray}$$</span><br>推导结果表面min max函数与上一节中带约束的凸优化问题是等价的。<br><br>### 将min max函数转为max min函数<br>貌似在满足一定的条件下，min max函数和max min函数在相同点取得最优解，也即：<br><span>$$\begin{eqnarray}
+&& \mathop{min}_{\vec w, b} \{ \mathop{max}_{\vec \alpha} L(\vec w, b, \vec \alpha) \} \\
+&=& \mathop{max}_{\vec \alpha} \{ \mathop{min}_{\vec w, b} L(\vec w, b, \vec \alpha) \} 
+\end{eqnarray}$$</span>
+
+<h2 id="求解对偶问题">求解对偶问题</h2>
+<p>先对内层min函数求一阶必要性条件：</p>
+<p><span>$$\begin{align}
+& \frac{\partial L }{\vec w} = \vec w - \sum_{i} \alpha_i y_i {\vec x}_i = 0 \\
+& \frac{\partial L }{b} = \sum_{i} \alpha_i y_i = 0 
+\end{align}$$</span><br>可得<span>$\vec w = \sum_{i} \alpha_i y_i {\vec x}_i$</span>，代入对偶问题中可得：</p>
+<p><span>$$\begin{align}
+& \mathop{max}_{\vec \alpha} \{ \mathop{min}_{\vec w, b} L(\vec w, b, \vec \alpha) \} 
+= \mathop{max}_{\vec \alpha} \{ \sum_{i} \alpha_i - \sum_{i,j} \alpha_i \alpha_j y_i y_j {\vec x}_i {\vec x}_j \} 
+& s.t. \quad \sum_{i} \alpha_i y_i = 0 
+\end{align}$$</span><br>转化成上述形式后可通过SMO算法快速求得最优解。</p>
 
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lijian.ml/2014/01/01/summary2013/" data-id="6oby5g6cinalechq" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lijian.ml/2014/07/12/SVM-model/" data-id="ffyn6vqzigxxwdqu" class="article-share-link">Share</a>  -->
       <!-- 文章的评论功能打开并且配置了disqus-->
       
       <!-- 显示文章标签 -->
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/summary/">summary</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVM/">SVM</a></li></ul>
 
     </footer>
   </div>
@@ -155,19 +215,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2014/01/15/an_probability_problem/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2014/11/21/手机照片整理/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          一个有意思的概率问题
+          手机照片整理
         
       </div>
     </a>
   
   
-    <a href="/2013/11/03/DCT/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2014/07/05/kkt/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">离散余弦变换(DCT)与离散傅里叶变换(DFT)的关系</div>
+      <div class="article-nav-title">对KKT条件的理解</div>
     </a>
   
 </nav>
@@ -178,7 +238,7 @@
 
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-summary2013" data-title="往者不可谏，来者犹可追" data-url="http://lijian.ml/2014/01/01/summary2013/"></div>
+    <div class="ds-thread" data-thread-key="post-SVM-model" data-title="SVM数学推导" data-url="http://lijian.ml/2014/07/12/SVM-model/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
