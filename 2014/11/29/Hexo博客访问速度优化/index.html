@@ -131,13 +131,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="shebang">#! /bin/bash</span></div><div class="line"></div><div class="line"><span class="comment"># 页面中关于MathJax的脚本包含语句分成了2行，begin 和 end</span></div><div class="line">begin=<span class="string">'&lt;script type="text\/javascript" src="http:\/\/cdn.mathjax.org\/mathjax\/latest\/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;'</span></div><div class="line">end=<span class="string">'&lt;\/script&gt;'</span></div><div class="line"><span class="comment"># pos为参考行，最终将MathJax包含语句移动到pos的后面</span></div><div class="line">pos=<span class="string">'&lt;script src="\/js\/script.js" type="text\/javascript"&gt;&lt;\/script&gt;'</span></div><div class="line"></div><div class="line"><span class="comment"># 先删掉MathJax包含语句，然后在参考位置后面添加MathJax包含语句</span></div><div class="line">find ./public -name <span class="string">'index.html'</span> | xargs -I <span class="string">'{}'</span> \</div><div class="line">sed -i <span class="operator">-e</span> /<span class="string">"<span class="variable">$begin</span>"</span>/,/<span class="string">"<span class="variable">$end</span>"</span>/d <span class="operator">-e</span> <span class="string">"/^<span class="variable">$pos</span>/a<span class="variable">$begin</span><span class="variable">$end</span>"</span> <span class="string">'{}'</span></div></pre></td></tr></table></figure>
 
 <p>每次运行 Hexo g 命令后都要运行上述bash以调整MathJax包含语句的位置，然后再deploy。</p>
+<h2 id="其他优化">其他优化</h2>
+<p>解决脚本阻塞问题后，手机访问明显快了不少。之后我又进行了一些其他的优化，比如把jQuery.min.js改成从本地包含，google的字体渲染干脆没用。这样下来速度已经很快了，<a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">PageSpeed Insights</a>还提供了很多其他优化建议，由于太麻烦，暂且没弄了。</p>
 <h2 id="小结">小结</h2>
 <p>整个过程挺纠结的，但也学到了不少，再次感受到bash的强大。</p>
 
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lijian.ml/2014/11/29/Hexo博客访问速度优化/" data-id="8tp8i4klwfmz2fup" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lijian.ml/2014/11/29/Hexo博客访问速度优化/" data-id="sax44sftnm5k55xp" class="article-share-link">Share</a>  -->
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sed/">sed</a></li></ul>
