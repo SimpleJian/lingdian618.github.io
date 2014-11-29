@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lijian.ml/"/>
-  <updated>2014-11-29T06:35:03.754Z</updated>
+  <updated>2014-11-29T06:48:49.778Z</updated>
   <id>http://lijian.ml/</id>
   
   <author>
@@ -13,6 +13,19 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hexo博客访问速度优化]]></title>
+    <link href="http://lijian.ml/2014/11/29/Hexo%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/"/>
+    <id>http://lijian.ml/2014/11/29/Hexo博客访问速度优化/</id>
+    <published>2014-11-29T06:42:39.000Z</published>
+    <updated>2014-11-29T06:42:39.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    <summary type="html">
+    <![CDATA[]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[给博客添加Gallery页面]]></title>
