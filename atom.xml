@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lijian.ml/"/>
-  <updated>2014-11-29T09:21:59.868Z</updated>
+  <updated>2014-11-29T09:44:18.682Z</updated>
   <id>http://lijian.ml/</id>
   
   <author>
@@ -123,7 +123,7 @@
     <link href="http://lijian.ml/2014/07/12/SVM-model/"/>
     <id>http://lijian.ml/2014/07/12/SVM-model/</id>
     <published>2014-07-11T16:00:00.000Z</published>
-    <updated>2014-11-28T12:02:42.000Z</updated>
+    <updated>2014-11-29T09:43:27.000Z</updated>
     <content type="html"><![CDATA[<h2 id="最优间隔分类器">最优间隔分类器</h2>
 <p>针对模式分类问题，通过特征提取后，就能得到特征向量及对应的类别标签：</p>
 <span>$$( {\vec x}_i, y_i ), \quad i=1,2,3 \cdots m$$</span>
@@ -149,7 +149,14 @@
 & \mathop{min}_{\vec w, b}  \frac{1}{2}{\Vert \vec w \Vert}^2  , & s.t. \quad  |\vec w \cdot {\vec x}_i + b| \geq 1 \\
 & \Leftrightarrow 
 & \mathop{min}_{\vec w, b}  \frac{1}{2}{\Vert \vec w \Vert}^2  , & s.t. \quad  (\vec w \cdot {\vec x}_i + b)\cdot y_i \geq 1 
-\end{eqnarray}$$</span><br>最终，我们将上一节复杂的优化问题转化成了一个带约束的凸优化问题，但仍然不好求解，所以还得转化。<br><br>## 转化为对偶问题<br>为了得到对偶问题，先构造罚函数<span>$L(\vec w, b, \vec \alpha)$</span>，然后分析<span>$\mathop{max}_{\vec w, b} \{ \mathop{min}_{\vec \alpha} L(\vec w, b, \vec \alpha) \}$</span>与上一节的带约束凸优化问题等价，接着根据对偶原理将max min问题转化为min max问题：<span>$\mathop{min}_{\vec \alpha} \{ \mathop{max}_{\vec w, b} L(\vec w, b, \vec \alpha) \}$</span>。<br><br>### 罚函数的构造<br>罚函数的思想是把约束条件吸收到目标函数里面，通过增加目标函数的参数来减少约束条件，同时为了保证罚函数与原优化问题等价，往往需要引入新的约束，但新的约束条件通常较简单。在此引入的罚函数为：<br><span>$$\begin{align}
+\end{eqnarray}$$</span>
+
+<p>最终，我们将上一节复杂的优化问题转化成了一个带约束的凸优化问题，但仍然不好求解，所以还得转化。</p>
+<h2 id="转化为对偶问题">转化为对偶问题</h2>
+<p>为了得到对偶问题，先构造罚函数<span>$L(\vec w, b, \vec \alpha)$</span>，然后分析<span>$\mathop{max}_{\vec w, b} \{ \mathop{min}_{\vec \alpha} L(\vec w, b, \vec \alpha) \}$</span>与上一节的带约束凸优化问题等价，接着根据对偶原理将max min问题转化为min max问题：<span>$\mathop{min}_{\vec \alpha} \{ \mathop{max}_{\vec w, b} L(\vec w, b, \vec \alpha) \}$</span>。</p>
+<h3 id="罚函数的构造">罚函数的构造</h3>
+<p>罚函数的思想是把约束条件吸收到目标函数里面，通过增加目标函数的参数来减少约束条件，同时为了保证罚函数与原优化问题等价，往往需要引入新的约束，但新的约束条件通常较简单。在此引入的罚函数为：</p>
+<span>$$\begin{align}
 & L(\vec w, b, \vec \alpha)=\frac{1}{2}{\Vert \vec w \Vert}^2 - \sum_{i} \alpha_i [(\vec w \cdot {\vec x}_i + b)\cdot y_i - 1 ] \\
 & s.t. \quad \alpha_i \geq 0 
 \end{align}$$</span>
@@ -161,7 +168,12 @@
 &=& \mathop{min}_{\vec w, b} \{ \mathop{max}_{\vec \alpha \geq 0, (\vec w, b)\in A } L(\vec w, b, \vec \alpha), \mathop{max}_{\vec \alpha \geq 0 , (\vec w, b)\in B } L(\vec w, b, \vec \alpha) \}  \\
 &=& \mathop{min}_{\vec w, b} \{ { \frac{1}{2}{\Vert \vec w \Vert}^2 }_{ (\vec w, b)\in A }, { \frac{1}{2}{\Vert \vec w \Vert}^2 }_{ (\vec w, b)\in B } + \infty \}  \\
 &=& \mathop{min}_{\vec w, b}_{ (\vec w, b)\in A }  \frac{1}{2}{\Vert \vec w \Vert}^2  
-\end{eqnarray}$$</span><br>推导结果表面min max函数与上一节中带约束的凸优化问题是等价的。<br><br>### 将min max函数转为max min函数<br>貌似在满足一定的条件下，min max函数和max min函数在相同点取得最优解，也即：<br><span>$$\begin{eqnarray}
+\end{eqnarray}$$</span>
+
+<p>推导结果表面min max函数与上一节中带约束的凸优化问题是等价的。</p>
+<h3 id="将min_max函数转为max_min函数">将min max函数转为max min函数</h3>
+<p>貌似在满足一定的条件下，min max函数和max min函数在相同点取得最优解，也即：</p>
+<span>$$\begin{eqnarray}
 && \mathop{min}_{\vec w, b} \{ \mathop{max}_{\vec \alpha} L(\vec w, b, \vec \alpha) \} \\
 &=& \mathop{max}_{\vec \alpha} \{ \mathop{min}_{\vec w, b} L(\vec w, b, \vec \alpha) \} 
 \end{eqnarray}$$</span>
