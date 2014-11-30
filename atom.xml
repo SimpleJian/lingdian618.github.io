@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lijian.ml/"/>
-  <updated>2014-11-30T06:20:58.473Z</updated>
+  <updated>2014-11-30T06:23:14.988Z</updated>
   <id>http://lijian.ml/</id>
   
   <author>
@@ -19,9 +19,9 @@
     <link href="http://lijian.ml/2014/11/30/JPEG%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E7%A5%9E%E5%99%A8/"/>
     <id>http://lijian.ml/2014/11/30/JPEG图片压缩神器/</id>
     <published>2014-11-30T04:07:38.000Z</published>
-    <updated>2014-11-30T06:20:44.000Z</updated>
-    <content type="html"><![CDATA[<p>昨天在微博上有人推荐<a href="https://tinyjpg.com/" target="_blank" rel="external">TinyJPG</a>，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。</p>
-<p><img src="http://public-lingdian618.qiniudn.com/images/IMG_1545.JPG" alt="压缩后"><br><img src="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG" alt="压缩前"></p>
+    <updated>2014-11-30T06:23:12.000Z</updated>
+    <content type="html"><![CDATA[<p>昨天在微博上有人推荐<a href="https://tinyjpg.com/" target="_blank" rel="external">TinyJPG</a>，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎肉眼无法分辨。</p>
+<p><img src="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG" alt="压缩后"><br><img src="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG" alt="压缩前"></p>
 <p>于是乎，想着把博客Gallery页面中的图片都压缩下。<a href="https://tinyjpg.com/" target="_blank" rel="external">TinyJPG</a>提供了开发人员<a href="https://tinypng.com/developers" target="_blank" rel="external">API</a>，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用了。然后使用下面的语句提交图片进行压缩，完了会返回包含压缩后图片链接的结果。</p>
 <p>提交图片进行压缩：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -i --user api:YOUR_API_KEY --data-binary @large.png https://api.tinypng.com/shrink</div></pre></td></tr></table></figure>
