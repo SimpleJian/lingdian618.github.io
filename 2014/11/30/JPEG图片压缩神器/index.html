@@ -3,32 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>对KKT条件的理解 | Lijian&#39;s Site</title>
+  <title>JPEG图片压缩神器 | Lijian&#39;s Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="带约束的数值优化问题
-数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：
-$$min f(\vec{x}) \\
-s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
+  <meta name="description" content="昨天在微博上有人推荐TinyJPG，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。
 
-其中，$f(\vec{x})$是优化目标，$\vec{x}$是变量，$g(\vec{x})$是不等式约束，$h">
+于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对KKT条件的理解">
-<meta property="og:url" content="http://lijian.ml/2014/07/05/kkt/">
+<meta property="og:title" content="JPEG图片压缩神器">
+<meta property="og:url" content="http://lijian.ml/2014/11/30/JPEG图片压缩神器/">
 <meta property="og:site_name" content="Lijian's Site">
-<meta property="og:description" content="带约束的数值优化问题
-数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：
-$$min f(\vec{x}) \\
-s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
+<meta property="og:description" content="昨天在微博上有人推荐TinyJPG，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。
 
-其中，$f(\vec{x})$是优化目标，$\vec{x}$是变量，$g(\vec{x})$是不等式约束，$h">
+于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用">
+<meta property="og:image" content="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG">
+<meta property="og:image" content="http://public-lingdian618.qiniudn.com/images/IMG_1545.JPG">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对KKT条件的理解">
-<meta name="twitter:description" content="带约束的数值优化问题
-数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：
-$$min f(\vec{x}) \\
-s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
+<meta name="twitter:title" content="JPEG图片压缩神器">
+<meta name="twitter:description" content="昨天在微博上有人推荐TinyJPG，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。
 
-其中，$f(\vec{x})$是优化目标，$\vec{x}$是变量，$g(\vec{x})$是不等式约束，$h">
+于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用">
 
   
     <link rel="alternative" href="/atom.xml" title="Lijian&#39;s Site" type="application/atom+xml">
@@ -110,14 +103,14 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
 </header>
       
       <div class="outer">
-        <section id="main"><article id="post-kkt" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JPEG图片压缩神器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/07/05/kkt/" class="article-date">
-  <time datetime="2014-07-04T16:00:00.000Z" itemprop="datePublished">Jul 5 2014</time>
+    <a href="/2014/11/30/JPEG图片压缩神器/" class="article-date">
+  <time datetime="2014-11-30T04:07:38.000Z" itemprop="datePublished">Nov 30 2014</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+    <a class="article-category-link" href="/categories/其他/">其他</a>
   </div>
 
   </div>
@@ -128,7 +121,7 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
         
   
     <h1 class="article-title" itemprop="name">
-      对KKT条件的理解
+      JPEG图片压缩神器
     </h1>
   
 
@@ -136,45 +129,26 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="带约束的数值优化问题">带约束的数值优化问题</h2>
-<p>数值优化问题是在有限维实空间上求单值函数的极值。函数的自变量可能受限制于有限个等式或不等式约束。数值优化问题通常可以写成如下形式：</p>
-<span>$$min f(\vec{x}) \\
-s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
+        <p>昨天在微博上有人推荐<a href="https://tinyjpg.com/" target="_blank" rel="external">TinyJPG</a>，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。</p>
+<p><img src="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG" alt="压缩前"><br><img src="http://public-lingdian618.qiniudn.com/images/IMG_1545.JPG" alt="压缩后"></p>
+<p>于是乎，想着把博客Gallery页面中的图片都压缩下。<a href="https://tinyjpg.com/" target="_blank" rel="external">TinyJPG</a>提供了开发人员<a href="https://tinypng.com/developers" target="_blank" rel="external">API</a>，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用了。然后使用下面的语句提交图片进行压缩，完了会返回包含压缩后图片链接的结果。</p>
+<p>提交图片进行压缩：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -i --user api:YOUR_API_KEY --data-binary @large.png https://api.tinypng.com/shrink</div></pre></td></tr></table></figure>
 
-<p>其中，<span>$f(\vec{x})$</span>是优化目标，<span>$\vec{x}$</span>是变量，<span>$g(\vec{x})$</span>是不等式约束，<span>$h(\vec{x})$</span>是等式约束，通常来说，所有的优化问题都可以转化为以上形式。</p>
-<h2 id="无约束优化问题的一阶必要性条件">无约束优化问题的一阶必要性条件</h2>
-<span>$$\nabla f(\vec{x})=0$$</span>
+<p>返回结果示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">HTTP/<span class="number">1.1</span> <span class="number">100</span> Continue</div><div class="line"></div><div class="line">HTTP/<span class="number">1.1</span> <span class="number">201</span> Created</div><div class="line">Cache-Control: no-cache</div><div class="line">Content-Type: application/json; charset=utf-<span class="number">8</span></div><div class="line">Date: Sun, <span class="number">30</span> Nov <span class="number">2014</span> <span class="number">04</span>:<span class="number">05</span>:<span class="number">34</span> GMT</div><div class="line">Location: https://api.tinypng.com/output/t3ovb77ss91l4tl5.jpg</div><div class="line">Server: Apache/<span class="number">2</span></div><div class="line">Strict-Transport-Security: max-age=<span class="number">31536000</span></div><div class="line">X-Powered-By: Voormedia (voormedia.com/jobs)</div><div class="line">Content-Length: <span class="number">166</span></div><div class="line">Connection: keep-alive</div><div class="line"></div><div class="line">{<span class="string">"input"</span>:{<span class="string">"size"</span>:<span class="number">3624668</span>,<span class="string">"type"</span>:<span class="string">"image/jpeg"</span>},<span class="string">"output"</span>:{<span class="string">"size"</span>:<span class="number">862075</span>,<span class="string">"type"</span>:<span class="string">"image/jpeg"</span>,<span class="string">"ratio"</span>:<span class="number">0.2378</span>,<span class="string">"url"</span>:<span class="string">"https://api.tinypng.com/output/t3ovb77ss91l4tl5.jpg"</span>}}</div></pre></td></tr></table></figure>
 
+<p>返回结果的末尾是一个JSON文件，其中包含了输入文件和输出文件的基本信息，压缩比，输出问题地址等。要实现批处理，关键在于从结果中提取输出文件的地址。于是搜了下如何用bash解析JSON，看到<a href="http://stackoverflow.com/questions/1955505/parsing-json-with-sed-and-awk" target="_blank" rel="external">stackoverflow</a>有人提到使用<a href="https://github.com/micha/jsawk" target="_blank" rel="external">jsawk</a>来做，但我在用的时候遇到一点小问题，可能跟系统环境有关。接着我发现返回结果的第6行中包含的Location字段其实就是输出文件的地址，使用awk可以很方便地得到这一行的信息。这样一来，批处理压缩图片也就很简单了，代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="shebang">#! /bin/bash</span></div><div class="line"><span class="comment"># 要压缩的图片目录，可包含多层子目录</span></div><div class="line">src=<span class="variable">$1</span></div><div class="line"><span class="comment"># 压缩图片存储目录</span></div><div class="line">dst=<span class="variable">$2</span></div><div class="line"><span class="comment"># 搜索JPG图片</span></div><div class="line"><span class="keyword">for</span> file <span class="keyword">in</span> `find <span class="variable">$src</span> -name <span class="string">'*.JPG'</span>`</div><div class="line"><span class="keyword">do</span></div><div class="line">  dir=`dirname <span class="variable">$file</span>`</div><div class="line">  mkdir -p <span class="variable">$dst</span>/<span class="variable">$dir</span></div><div class="line">  <span class="comment"># 提交单张图片进行压缩并下载压缩后的图片到本地</span></div><div class="line">  curl -i --user api:hQgNGMmE4ThuaPn8AJj8EyV0ePoj8Mp2 --data-binary @<span class="variable">$file</span> https://api.tinypng.com/shrink | awk <span class="string">'/Location/{print $2}'</span> | xargs -I <span class="string">'{}'</span> curl -L <span class="string">'{}'</span> &gt; <span class="variable">$dst</span>/<span class="variable">$dir</span>/`basename <span class="variable">$file</span>`</div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
 
-<h2 id="只含等式约束的一阶必要性条件—lagrangian_methond">只含等式约束的一阶必要性条件—lagrangian methond</h2>
-<span>$$\nabla f(\vec{x}) = \sum\lambda_i\nabla h_i(\vec{x})$$</span>
-
-<h2 id="一般优化问题的一阶必要性条件—KKT_condition">一般优化问题的一阶必要性条件—KKT condition</h2>
-<span>$$\nabla f(\vec{x}) = \sum\lambda_i\nabla h_i(\vec{x}) + \sum_{\mu_j \geq 0}\mu_j\nabla g_j(\vec{x}) \\
-\mu_j g_j(\vec{x}) = 0，\quad \forall j$$</span>
-
-
-<p>无论优化问题是否有约束，一阶必要性条件在本质上是一样的，如果某点是极值点，那么在该点处一定不存在一个可行的下降（上升）方向使函数值减小（增大），这就是极值点的一阶必要性条件，以下2种情况可以满足该条件：</p>
-<ul>
-<li>函数在该点的梯度为0，典型的例子是无约束优化问题的一阶必要性条件；</li>
-<li>函数在该点的梯度不为0，但由于约束条件的存在，无法沿梯度方向移动来使函数值发生变化。</li>
-</ul>
-<p>先考虑只有一个等式约束的情况，此时自变量的可行域是一个约束面，假设<span>$\vec{x}$</span>最初位于<span>$\vec{x_0}$</span>处，那么此时<span>$\vec{x}$</span>的移动方向肯定不能与约束面的法向量方向平行，也不能包含法向量方向的分量，否则沿该方向移动将使得<span>$\vec{x}$</span>跳出约束面。所以，当目标函数的梯度方向与约束面在该点的法向量方向平行时，就找不到一个可行的合法的下降方向了（沿梯度方向移动才能下降）。用数学公式表达出来就是<span>$\nabla f(\vec{x}) = \lambda \nabla h(\vec{x})$</span>，这正是只含一个等式约束条件的一阶必要性条件。</p>
-<p>再考虑有多个等式约束的情况，此时自变量可行域为多个约束面的交集，如果目标函数的梯度恰好可以分解为约束面的法向量线性组合，那么，沿目标函数梯度方向的移动将会违背约束条件，所以，含多个等式约束的优化问题的一阶必要性条件为：<span>$\nabla f(\vec{x}) = \sum \lambda_i \nabla h_i(\vec{x})$</span></p>
-<p>最后考虑含不等式约束的情况，此时的可行域是由等式约束决定的约束面以及由不等式约束决定的区域的交集。要判定 <span>$\vec{x}$</span>是否是极值点，可分以下2种情况考虑：</p>
-<ol>
-<li><span>$\vec{x}$</span>位于区域边界上，此时不等式约束的等号恰好成立，此时的情况可以与等式约束类比，只不过在分解梯度的时候，限定了法向量的方向；</li>
-<li><span>$\vec{x}$</span>位于区域内部，此时的不等式约束对可行方向不具约束力，在分解梯度时无需考虑，因此对应的<span>$\mu_j=0$</span>，这也解释了为什么要满足互补条件。</li>
-</ol>
-<p>总结，优化问题的一阶必要性条件的实质是考察梯度条件，这也是为什么叫“一阶”必要性条件的原因。对于带约束的优化问题，只要将约束条件转化为对可行方向的约束，就能够比较直观地理解一阶必要性条件。</p>
 
       
     </div>
     <footer class="article-footer">
-    <!--  <a data-url="http://lijian.ml/2014/07/05/kkt/" data-id="esgq8d9ofykge280" class="article-share-link">Share</a>  -->
+    <!--  <a data-url="http://lijian.ml/2014/11/30/JPEG图片压缩神器/" data-id="g468ihrvx2v59zsq" class="article-share-link">Share</a>  -->
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KKT/">KKT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/optimization/">optimization</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TinyJPG/">TinyJPG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/">bash</a></li></ul>
 
     </footer>
   </div>
@@ -182,19 +156,10 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
     
 <nav id="article-nav">
   
-    <a href="/2014/07/12/SVM-model/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          SVM数学推导
-        
-      </div>
-    </a>
   
-  
-    <a href="/2014/06/18/cluster/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2014/11/29/Hexo博客访问速度优化/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">聚类中的关键问题--于剑老师讲座报告</div>
+      <div class="article-nav-title">Hexo博客访问速度优化</div>
     </a>
   
 </nav>
@@ -204,7 +169,7 @@ s.t. \quad g_i(\vec{x})\geq0, h_j(\vec{x})=0$$</span>
 
 
   <section id="comments">
-    <div class="ds-thread" data-thread-key="post-kkt" data-title="对KKT条件的理解" data-url="http://lijian.ml/2014/07/05/kkt/"></div>
+    <div class="ds-thread" data-thread-key="post-JPEG图片压缩神器" data-title="JPEG图片压缩神器" data-url="http://lijian.ml/2014/11/30/JPEG图片压缩神器/"></div>
     <script type="text/javascript">
     var duoshuoQuery = {short_name:'lingdian618'};
       (function() {
