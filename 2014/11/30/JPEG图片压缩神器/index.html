@@ -7,24 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="昨天在微博上有人推荐TinyJPG，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。
 
-
-于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够">
+于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JPEG图片压缩神器">
 <meta property="og:url" content="http://lijian.ml/2014/11/30/JPEG图片压缩神器/">
 <meta property="og:site_name" content="Lijian's Site">
 <meta property="og:description" content="昨天在微博上有人推荐TinyJPG，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。
 
-
-于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够">
-<meta property="og:image" content="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG">
+于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用">
 <meta property="og:image" content="http://public-lingdian618.qiniudn.com/images/IMG_1545.JPG">
+<meta property="og:image" content="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JPEG图片压缩神器">
 <meta name="twitter:description" content="昨天在微博上有人推荐TinyJPG，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。
 
-
-于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够">
+于是乎，想着把博客Gallery页面中的图片都压缩下。TinyJPG提供了开发人员API，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用">
 
   
     <link rel="alternative" href="/atom.xml" title="Lijian&#39;s Site" type="application/atom+xml">
@@ -133,8 +130,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>昨天在微博上有人推荐<a href="https://tinyjpg.com/" target="_blank" rel="external">TinyJPG</a>，说是一款高保真JPEG图片压缩神器，我当时就试了2张图片，一张199.3k的压到104.2k，另一张3.6M的压到862.1k，关键是压缩后的图与压缩前的图片几乎无法肉眼分辨。</p>
-<p><img src="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG" alt="压缩前"></p>
-<p><img src="http://public-lingdian618.qiniudn.com/images/IMG_1545.JPG" alt="压缩后"></p>
+<p><img src="http://public-lingdian618.qiniudn.com/images/IMG_1545.JPG" alt="压缩后"><br><img src="http://public-lingdian618.qiniudn.com/images/八达岭长城/IMG_1545.JPG" alt="压缩前"></p>
 <p>于是乎，想着把博客Gallery页面中的图片都压缩下。<a href="https://tinyjpg.com/" target="_blank" rel="external">TinyJPG</a>提供了开发人员<a href="https://tinypng.com/developers" target="_blank" rel="external">API</a>，填写邮箱和姓名即可获取API key，免费用户每个月有500次压缩机会，对一般用户来说完全够用了。然后使用下面的语句提交图片进行压缩，完了会返回包含压缩后图片链接的结果。</p>
 <p>提交图片进行压缩：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -i --user api:YOUR_API_KEY --data-binary @large.png https://api.tinypng.com/shrink</div></pre></td></tr></table></figure>
