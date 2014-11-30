@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Everything is possible if you have the real passion to what you do]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lijian.ml/"/>
-  <updated>2014-11-30T06:23:53.577Z</updated>
+  <updated>2014-11-30T07:26:12.806Z</updated>
   <id>http://lijian.ml/</id>
   
   <author>
@@ -146,23 +146,6 @@
       <category term="qiniu" scheme="http://lijian.ml/tags/qiniu/"/>
     
       <category term="其他" scheme="http://lijian.ml/categories/%E5%85%B6%E4%BB%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[薄板样条和配准]]></title>
-    <link href="http://lijian.ml/2014/11/04/%E8%96%84%E6%9D%BF%E6%A0%B7%E6%9D%A1%E5%92%8C%E9%85%8D%E5%87%86/"/>
-    <id>http://lijian.ml/2014/11/04/薄板样条和配准/</id>
-    <published>2014-11-04T13:31:22.000Z</published>
-    <updated>2014-11-04T13:31:22.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
-    <summary type="html">
-    <![CDATA[]]>
-    </summary>
-    
-      <category term="thin-plate spline" scheme="http://lijian.ml/tags/thin-plate-spline/"/>
-    
-      <category term="image registration" scheme="http://lijian.ml/tags/image-registration/"/>
     
   </entry>
   
